@@ -7,18 +7,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Generate Random Words',
-        theme: ThemeData(
-          primarySwatch: Colors.cyan,
-        ),
-        home: Scaffold(
-          appBar: AppBar(
-            title: Text('Random Words Generator'),
-          ),
-          body: Center(
-            child: RandomWords(),
-          ),
-        ));
+        title: 'Random PascalCase Words',
+        home:  RandomWords(),
+    );
   }
 }
 
@@ -28,12 +19,39 @@ class RandomWords extends StatefulWidget {
 }
 
 class _RandomWordsState extends State<RandomWords> {
+  final _randomWords = <WordPair>[];
+  final _wordsFont = const TextStyle(fontSize: 18.0);
+  final _listPadding = const EdgeInsets.all(16.0);
+
+  Widget _buildListOfRandomWords() {
+    return ListView.builder(
+        padding: _listPadding,
+        itemBuilder: (context, i) {
+          if (i.isOdd) return Divider();
+          final index = i ~/ 2;
+          if (index >= _randomWords.length) {
+            _randomWords.addAll(generateWordPairs().take(10));
+          }
+          return _buildRow(_randomWords[index]);
+        });
+  }
+
+  Widget _buildRow(WordPair pair) {
+    return ListTile(
+      title: Text(
+        pair.asPascalCase,
+        style: _wordsFont,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final wordPair = WordPair.random();
-    return Text(
-      wordPair.asPascalCase,
-      style: Theme.of(context).textTheme.display3,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('PascalCase Name Generator'),
+      ),
+      body: _buildListOfRandomWords(),
     );
   }
 }
