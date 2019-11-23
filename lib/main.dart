@@ -7,8 +7,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Random PascalCase Words',
-        home:  RandomWords(),
+      title: 'Name Generator',
+      home: RandomWords(),
     );
   }
 }
@@ -20,6 +20,7 @@ class RandomWords extends StatefulWidget {
 
 class _RandomWordsState extends State<RandomWords> {
   final _randomWords = <WordPair>[];
+  final Set<WordPair> _savedWords = Set<WordPair>();
   final _wordsFont = const TextStyle(fontSize: 18.0);
   final _listPadding = const EdgeInsets.all(16.0);
 
@@ -36,12 +37,26 @@ class _RandomWordsState extends State<RandomWords> {
         });
   }
 
-  Widget _buildRow(WordPair pair) {
+  Widget _buildRow(WordPair words) {
+    final bool isSaved = _savedWords.contains(words);
     return ListTile(
       title: Text(
-        pair.asPascalCase,
+        words.asPascalCase,
         style: _wordsFont,
       ),
+      trailing: Icon(
+        isSaved ? Icons.favorite : Icons.favorite_border,
+        color: isSaved ? Colors.red : null,
+      ),
+      onTap: () {
+        setState(() {
+          if (isSaved) {
+            _savedWords.remove(words);
+          } else {
+            _savedWords.add(words);
+          }
+        });
+      },
     );
   }
 
@@ -49,9 +64,44 @@ class _RandomWordsState extends State<RandomWords> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('PascalCase Name Generator'),
+        title: Text('Name Generator'),
+        actions: <Widget>[
+          IconButton(
+              icon: Icon(Icons.list),
+              onPressed: _savedWords.isEmpty ? null : _pushSaved),
+        ],
       ),
       body: _buildListOfRandomWords(),
+    );
+  }
+
+  void _pushSaved() {
+    Navigator.of(context).push(
+      MaterialPageRoute<void>(
+        builder: (BuildContext context) {
+          final Iterable<ListTile> tiles = _savedWords.map(
+            (WordPair pair) {
+              return ListTile(
+                title: Text(
+                  pair.asPascalCase,
+                  style: _wordsFont,
+                ),
+              );
+            },
+          );
+          final List<Widget> divided = ListTile.divideTiles(
+            context: context,
+            tiles: tiles,
+          ).toList();
+
+          return Scaffold(
+            appBar: AppBar(
+              title: Text('Favourites'),
+            ),
+            body: ListView(children: divided),
+          );
+        },
+      ),
     );
   }
 }
