@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:english_words/english_words.dart';
+import 'package:share/share.dart';
 
 void main() => runApp(MyApp());
 
@@ -8,6 +9,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Name Generator',
+      theme: ThemeData(          // Add the 3 lines from here...
+        primaryColor: Colors.black,
+      ),
       home: RandomWords(),
     );
   }
@@ -80,7 +84,7 @@ class _RandomWordsState extends State<RandomWords> {
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
           final Iterable<ListTile> tiles = _savedWords.map(
-            (WordPair pair) {
+                (WordPair pair) {
               return ListTile(
                 title: Text(
                   pair.asPascalCase,
@@ -99,9 +103,19 @@ class _RandomWordsState extends State<RandomWords> {
               title: Text('Favourites'),
             ),
             body: ListView(children: divided),
+            floatingActionButton: FloatingActionButton(
+              onPressed: _share,
+              tooltip: 'Share',
+              child: Icon(Icons.share),
+            ),
           );
         },
       ),
     );
+  }
+
+  void _share() {
+    //setState(() {}
+    Share.share(_savedWords.toString());
   }
 }
