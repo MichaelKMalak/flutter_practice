@@ -115,7 +115,6 @@ class _RandomWordsState extends State<RandomWords> {
   }
 
   void _share() {
-    //setState(() {}
     Share.share(_savedWords.toString());
   }
 }
