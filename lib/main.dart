@@ -1,74 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:english_words/english_words.dart';
+import 'dart:math' as math;
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Basic Shapes',
-    home: Scaffold(
-      appBar: AppBar(
-        title: Text('Basic Shapes'),
-      ),
-      body: HelloRectangle(),
-    ),
-  ));
-}
+void main() => runApp(MyApp());
 
-class HelloRectangle extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.black,
-        height: 400.0,
-        width: 400.0,
-        child: Center(
-          child: Container(
-            height: 400.0,
-            width: 400.0,
-            decoration: new BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 150.0,
-                  width: 150.0,
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                ),
+    return MaterialApp(
+      title: 'Generate Random Words',
+      theme: ThemeData(
+        primarySwatch: Colors.cyan,
+      ),
+      home: RandomWords(),
+    );
+  }
+}
 
-                Row(
-                  children: <Widget>[
-                    Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.greenAccent,
-                      ),
-                    ),
-                    Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                    Container(
-                      height: 100.0,
-                      width: 200.0,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
+class RandomWords extends StatefulWidget {
+  @override
+  _RandomWordsState createState() => _RandomWordsState();
+}
+
+class _RandomWordsState extends State<RandomWords> {
+  // ignore: unused_field
+  int _refreshTimes = 0;
+  void _refresh() {
+    setState(() {
+      _refreshTimes++;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final wordPair = WordPair.random();
+    return Scaffold(
+      backgroundColor:
+          Color((math.Random().nextDouble() * 0xFFFFFF).toInt() << 0)
+              .withOpacity(1.0),
+      appBar: AppBar(
+        title: Text('Random Words Generator'),
+      ),
+      body: Center(
+          child: Text(
+        wordPair.asPascalCase,
+        style: Theme.of(context).textTheme.display3,
+      )),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _refresh,
+        tooltip: 'Refresh',
+        child: Icon(Icons.refresh),
       ),
     );
   }
