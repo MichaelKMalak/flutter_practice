@@ -9,3 +9,5 @@ I tries to use:
            * containers with different shapes
            
 # Screenshot
+
+<img src="https://raw.githubusercontent.com/MichaelKMalak/flutter_practice/master/screenshots/1.png" width="350" />
