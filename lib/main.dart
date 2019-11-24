@@ -1,120 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:english_words/english_words.dart';
-import 'package:share/share.dart';
+import 'package:flutter_practice/BmiPage.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+      .then((_) => runApp(new MyApp()));
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Name Generator',
-      theme: ThemeData(          // Add the 3 lines from here...
-        primaryColor: Colors.black,
-      ),
-      home: RandomWords(),
+      title: 'BMI Calculator',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.light(),
+      home: HomePage(),
     );
   }
 }
 
-class RandomWords extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _RandomWordsState createState() => _RandomWordsState();
+  _HomePageState createState() => _HomePageState();
 }
 
-class _RandomWordsState extends State<RandomWords> {
-  final _randomWords = <WordPair>[];
-  final Set<WordPair> _savedWords = Set<WordPair>();
-  final _wordsFont = const TextStyle(fontSize: 18.0);
-  final _listPadding = const EdgeInsets.all(16.0);
-
-  Widget _buildListOfRandomWords() {
-    return ListView.builder(
-        padding: _listPadding,
-        itemBuilder: (context, i) {
-          if (i.isOdd) return Divider();
-          final index = i ~/ 2;
-          if (index >= _randomWords.length) {
-            _randomWords.addAll(generateWordPairs().take(10));
-          }
-          return _buildRow(_randomWords[index]);
-        });
-  }
-
-  Widget _buildRow(WordPair words) {
-    final bool isSaved = _savedWords.contains(words);
-    return ListTile(
-      title: Text(
-        words.asPascalCase,
-        style: _wordsFont,
-      ),
-      trailing: Icon(
-        isSaved ? Icons.favorite : Icons.favorite_border,
-        color: isSaved ? Colors.red : null,
-      ),
-      onTap: () {
-        setState(() {
-          if (isSaved) {
-            _savedWords.remove(words);
-          } else {
-            _savedWords.add(words);
-          }
-        });
-      },
-    );
-  }
-
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Name Generator'),
-        actions: <Widget>[
-          IconButton(
-              icon: Icon(Icons.list),
-              onPressed: _savedWords.isEmpty ? null : _pushSaved),
-        ],
-      ),
-      body: _buildListOfRandomWords(),
+        body: BmiPage()
     );
-  }
-
-  void _pushSaved() {
-    Navigator.of(context).push(
-      MaterialPageRoute<void>(
-        builder: (BuildContext context) {
-          final Iterable<ListTile> tiles = _savedWords.map(
-                (WordPair pair) {
-              return ListTile(
-                title: Text(
-                  pair.asPascalCase,
-                  style: _wordsFont,
-                ),
-              );
-            },
-          );
-          final List<Widget> divided = ListTile.divideTiles(
-            context: context,
-            tiles: tiles,
-          ).toList();
-
-          return Scaffold(
-            appBar: AppBar(
-              title: Text('Favourites'),
-            ),
-            body: ListView(children: divided),
-            floatingActionButton: FloatingActionButton(
-              onPressed: _share,
-              tooltip: 'Share',
-              child: Icon(Icons.share),
-            ),
-          );
-        },
-      ),
-    );
-  }
-
-  void _share() {
-    Share.share(_savedWords.toString());
   }
 }
