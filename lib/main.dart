@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/BmiPage.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_practice/BMItheme.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations(
@@ -28,8 +29,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: BmiPage()
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'BMI Calculator',
+      theme: ThemeData(
+        primarySwatch: PRIMARY_COLOR,
+      ),
+      home: BmiPage(),
     );
   }
 }
