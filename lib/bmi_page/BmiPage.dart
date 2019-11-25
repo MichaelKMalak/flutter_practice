@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/BMItheme.dart';
-import 'utils.dart' show screenAwareSize;
+import 'package:flutter_practice/bmi_page/height_card.dart';
+import 'package:flutter_practice/bmi_page/weight_card.dart';
+import 'gender_card.dart';
+import '../utils.dart' show screenAwareSize;
 
 class BmiPage extends StatefulWidget {
   @override
@@ -56,23 +59,13 @@ class _BmiPageState extends State<BmiPage> {
           Expanded(
             child: Column(
               children: <Widget>[
-                Expanded(child: _tempCard("Gender")),
-                Expanded(child: _tempCard("Weight")),
+                Expanded(child: GenderCard()),
+                Expanded(child: WeightCard()),
               ],
             ),
           ),
-          Expanded(child: _tempCard("Height"))
+          Expanded(child: HeightCard())
         ],
-      ),
-    );
-  }
-
-  Widget _tempCard(String label) {
-    return Card(
-      child: Container(
-        width: double.infinity,
-        height: double.infinity,
-        child: Text(label),
       ),
     );
   }

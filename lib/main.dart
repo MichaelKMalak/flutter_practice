@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/BmiPage.dart';
+import 'package:flutter_practice/bmi_page/BmiPage.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_practice/BMItheme.dart';
 
