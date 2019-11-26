@@ -37,4 +37,7 @@ const TextStyle WEIGHT_TEXT_STYLE = TextStyle(
   color: Color.fromRGBO(196, 197, 203, 1.0),
   fontSize: 16.0,
 );
-
+const TextStyle HIGHLIGHTED_WEIGHT_TEXT_STYLE = TextStyle(
+  color: Color.fromRGBO(77, 123, 243, 1.0),
+  fontSize: 32.0,
+);

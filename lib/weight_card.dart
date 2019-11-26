@@ -11,6 +11,14 @@ class WeightCard extends StatefulWidget {
 }
 
 class _WeightCardState extends State<WeightCard> {
+  int weight;
+
+  @override
+  void initState() {
+    super.initState();
+    weight = 70;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -40,6 +48,8 @@ class _WeightCardState extends State<WeightCard> {
                   minValue: 30,
                   maxValue: 200,
                   width: constraints.maxWidth,
+                  value: weight,
+                  onChanged: (val) => setState(() => weight = val),
                   ),
               ),
       ),
@@ -84,34 +94,61 @@ class WeightSlider extends StatelessWidget {
     @required this.minValue,
     @required this.maxValue,
     @required this.width,
+    this.value,
+    this.onChanged,
   }) : super(key: key);
 
   final int minValue;
   final int maxValue;
   final double width;
 
+  final int value;
+  final ValueChanged<int> onChanged;
+
+  double get itemExtent => width / 3;
   int _indexToValue(int index) => minValue + (index - 1);
 
   @override
   build(BuildContext context) {
     int itemCount = (maxValue - minValue) + 3;
-    return new ListView.builder(
+    return NotificationListener(
+        onNotification: _onNotification,
+        child: new ListView.builder(
       scrollDirection: Axis.horizontal,
-      itemExtent: width / 3,
+      itemExtent: itemExtent,
       itemCount: itemCount,
       physics: BouncingScrollPhysics(),
       itemBuilder: (BuildContext context, int index) {
         final int value = _indexToValue(index);
         bool isExtra = index == 0 || index == itemCount - 1;
-        return isExtra ? new Container()
-         : Center(
-              child: new Text(
-                value.toString(),
-                style: WEIGHT_TEXT_STYLE,
+        return isExtra
+            ? new Container() //empty first and last element
+            : FittedBox(
+          child: Text(
+            value.toString(),
+            style: _getTextStyle(value),
           ),
+          fit: BoxFit.scaleDown,
         );
-      },
+      }
+    )
     );
   }
+  int _offsetToMiddleIndex(double offset) => (offset + width / 2) ~/ itemExtent;
+  bool _onNotification(Notification notification) {
+    if (notification is ScrollNotification) {
+      int middleValue = _indexToValue(_offsetToMiddleIndex(notification.metrics.pixels));
 
+      if (middleValue != value) {
+        onChanged(middleValue);
+      }
+    }
+    return true;
+  }
+  TextStyle _getTextStyle(int itemValue) {
+    return itemValue == value
+        ? HIGHLIGHTED_WEIGHT_TEXT_STYLE
+        : WEIGHT_TEXT_STYLE;
+  }
 }
+
