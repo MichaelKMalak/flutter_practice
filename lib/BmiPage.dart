@@ -35,7 +35,7 @@ class _BmiPageState extends State<BmiPage> {
       ),
       child: Center(child:Text(
         "BMI Calculator",
-        style: NUMBER_STYLE,
+        style: HEADLINE_STYLE,
       )),
     );
   }

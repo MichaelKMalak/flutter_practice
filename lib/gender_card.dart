@@ -7,7 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 
 //constants
-double circleRadius(BuildContext context) => screenAwareSize(150, context);
+double circleRadius(BuildContext context) => screenAwareSize(170, context);
 const double _DEFAULT_ANGLE = math.pi / 4;
 const Map<Gender, double> _genderAngle = {
   Gender.female: -_DEFAULT_ANGLE,
@@ -47,7 +47,7 @@ class _GenderCardState extends State<GenderCard>
               CardTitle("GENDER"),
               Padding(
                 padding: EdgeInsets.only(
-                    top: screenAwareSize(SMALL_PADDING, context)),
+                    top: screenAwareSize(25.0, context)),
                 child: _drawMainStack(),
               )
             ],
@@ -127,7 +127,7 @@ class DrawCircle extends StatelessWidget {
           height: circleRadius(context),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.blueGrey,
+            color: SECONDARY_COLOR,
           ),
         ),
       ],
