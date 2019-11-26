@@ -20,6 +20,7 @@ const Map<Gender, String> _GENDER_SVG = {
   Gender.male: "images/gender_male.svg",
 };
 
+//UI components
 class GenderCard extends StatefulWidget {
   final Gender gender;
   const GenderCard({Key key, this.gender}) : super(key: key);
@@ -27,6 +28,8 @@ class GenderCard extends StatefulWidget {
   _GenderCardState createState() => _GenderCardState();
 }
 class _GenderCardState extends State<GenderCard> {
+  Gender selectedGender;
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -48,26 +51,41 @@ class _GenderCardState extends State<GenderCard> {
       ),
     );
   }
-}
-Widget _drawMainStack() {
-  return Stack(
-    alignment: Alignment.bottomCenter,
-    children: <Widget>[
-      _drawCircleWithArrow(),
-      DrawGenderIcon(gender: Gender.female),
-      DrawGenderIcon(gender: Gender.other),
-      DrawGenderIcon(gender: Gender.male),
-    ],
-  );
-}
-Widget _drawCircleWithArrow() {
+
+  @override
+  void initState() {
+    selectedGender = widget.gender ?? Gender.other;
+    super.initState();
+  }
+
+  Widget _drawMainStack() {
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: <Widget>[
+        _drawCircleWithArrow(),
+        DrawGenderIcon(gender: Gender.female),
+        DrawGenderIcon(gender: Gender.other),
+        DrawGenderIcon(gender: Gender.male),
+        _addGestureDetector(),
+      ],
+    );
+  }
+  Widget _drawCircleWithArrow() {
     return Stack(
       alignment: Alignment.center,
       children: <Widget>[
         DrawCircle(),
-        DrawArrow(angle: _genderAngle[Gender.female]),
+        DrawArrow(angle: _genderAngle[selectedGender]),
       ],
     );
+  }
+  Widget _addGestureDetector(){
+    return Positioned.fill(
+      child: TapHandler(
+        onGenderTapped: (gender) => setState(() => selectedGender = gender),
+      ),
+    );
+  }
 }
 class DrawCircle extends StatelessWidget{
   @override
@@ -80,7 +98,7 @@ class DrawCircle extends StatelessWidget{
           height: circleRadius(context),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.grey,
+            color: Colors.blueGrey,
           ),
         ),
       ],
@@ -103,6 +121,7 @@ class DrawArrow extends StatelessWidget {
             "images/gender_arrow.svg",
             height: _arrowLength(context),
             width: _arrowLength(context),
+            color: Colors.white,
           ),
         ),
       ),
@@ -176,3 +195,21 @@ class DrawGenderIcon extends StatelessWidget {
   }
 }
 
+//Interactivity
+class TapHandler extends StatelessWidget {
+  final Function(Gender) onGenderTapped;
+
+  const TapHandler({Key key, this.onGenderTapped}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.max,
+      children: <Widget>[
+        Expanded(child: GestureDetector(onTap: () => onGenderTapped(Gender.female))),
+        Expanded(child: GestureDetector(onTap: () => onGenderTapped(Gender.other))),
+        Expanded(child: GestureDetector(onTap: () => onGenderTapped(Gender.male))),
+      ],
+    );
+  }
+}
