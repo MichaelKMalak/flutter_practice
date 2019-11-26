@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/BMItheme.dart';
-import 'package:flutter_practice/gender.dart';
-import 'package:flutter_practice/bmi_page/card_title.dart';
-import 'package:flutter_practice/utils.dart';
+import 'package:bmi_calculator/BMItheme.dart';
+import 'package:bmi_calculator/gender.dart';
+import 'card_title.dart';
+import 'package:bmi_calculator/utils.dart';
 
 class HeightCard extends StatefulWidget {
   final double height;

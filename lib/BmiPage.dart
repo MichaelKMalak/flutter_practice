@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/BMItheme.dart';
-import 'package:flutter_practice/bmi_page/height_card.dart';
-import 'package:flutter_practice/bmi_page/weight_card.dart';
+import 'height_card.dart';
+import 'package:bmi_calculator/BMItheme.dart';
+import 'weight_card.dart';
 import 'gender_card.dart';
-import '../utils.dart' show screenAwareSize;
+import 'utils.dart' show screenAwareSize;
 
 class BmiPage extends StatefulWidget {
   @override

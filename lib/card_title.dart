@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_practice/BMItheme.dart';
+import 'package:bmi_calculator/BMItheme.dart';
 
 class CardTitle extends StatelessWidget {
   final String _title;
