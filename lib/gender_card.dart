@@ -27,7 +27,9 @@ class GenderCard extends StatefulWidget {
   @override
   _GenderCardState createState() => _GenderCardState();
 }
-class _GenderCardState extends State<GenderCard> with SingleTickerProviderStateMixin{
+
+class _GenderCardState extends State<GenderCard>
+    with SingleTickerProviderStateMixin {
   Gender selectedGender;
   AnimationController _arrowAnimationController;
 
@@ -37,13 +39,15 @@ class _GenderCardState extends State<GenderCard> with SingleTickerProviderStateM
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.only(top: screenAwareSize(SMALL_PADDING, context)),
+          padding:
+              EdgeInsets.only(top: screenAwareSize(SMALL_PADDING, context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CardTitle("GENDER"),
               Padding(
-                padding: EdgeInsets.only(top: screenAwareSize(SMALL_PADDING, context)),
+                padding: EdgeInsets.only(
+                    top: screenAwareSize(SMALL_PADDING, context)),
                 child: _drawMainStack(),
               )
             ],
@@ -83,6 +87,7 @@ class _GenderCardState extends State<GenderCard> with SingleTickerProviderStateM
       ],
     );
   }
+
   Widget _drawCircleWithArrow() {
     return Stack(
       alignment: Alignment.center,
@@ -92,7 +97,8 @@ class _GenderCardState extends State<GenderCard> with SingleTickerProviderStateM
       ],
     );
   }
-  Widget _addGestureDetector(){
+
+  Widget _addGestureDetector() {
     return Positioned.fill(
       child: TapHandler(
         onGenderTapped: _setSelectedGender,
@@ -102,14 +108,15 @@ class _GenderCardState extends State<GenderCard> with SingleTickerProviderStateM
 
   void _setSelectedGender(Gender gender) {
     setState(() => selectedGender = gender);
-    _arrowAnimationController.animateTo( //<--- Animate the arrow
+    _arrowAnimationController.animateTo(
+      //<--- Animate the arrow
       _genderAngle[gender],
       duration: Duration(milliseconds: 150),
     );
   }
-
 }
-class DrawCircle extends StatelessWidget{
+
+class DrawCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -125,7 +132,9 @@ class DrawCircle extends StatelessWidget{
         ),
       ],
     );
-  }}
+  }
+}
+
 class GenderLine extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -137,11 +146,12 @@ class GenderLine extends StatelessWidget {
       child: Container(
         height: screenAwareSize(8.0, context),
         width: 1.0,
-        color: Color.fromRGBO(216, 217, 223, 0.54),
+        color: Colors.grey,
       ),
     );
   }
 }
+
 class DrawGenderIcon extends StatelessWidget {
   final Gender gender;
   const DrawGenderIcon({Key key, this.gender}) : super(key: key);
@@ -149,9 +159,8 @@ class DrawGenderIcon extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _iconSize = gender == Gender.other ? 50.0 : 40.0;
-    final genderAngle = gender == Gender.female
-        ? _genderAngle[gender]
-        : -_genderAngle[gender];
+    final genderAngle =
+        gender == Gender.female ? _genderAngle[gender] : -_genderAngle[gender];
 
     Widget icon = Padding(
       padding: EdgeInsets.only(left: screenAwareSize(SMALL_PADDING, context)),
@@ -204,17 +213,23 @@ class TapHandler extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.max,
       children: <Widget>[
-        Expanded(child: GestureDetector(onTap: () => onGenderTapped(Gender.female))),
-        Expanded(child: GestureDetector(onTap: () => onGenderTapped(Gender.other))),
-        Expanded(child: GestureDetector(onTap: () => onGenderTapped(Gender.male))),
+        Expanded(
+            child: GestureDetector(onTap: () => onGenderTapped(Gender.female))),
+        Expanded(
+            child: GestureDetector(onTap: () => onGenderTapped(Gender.other))),
+        Expanded(
+            child: GestureDetector(onTap: () => onGenderTapped(Gender.male))),
       ],
     );
   }
 }
-class DrawArrow extends AnimatedWidget  {
-  const DrawArrow({Key key, Listenable listenable}) : super(key: key, listenable: listenable);
+
+class DrawArrow extends AnimatedWidget {
+  const DrawArrow({Key key, Listenable listenable})
+      : super(key: key, listenable: listenable);
   double _arrowLength(BuildContext context) => screenAwareSize(70.0, context);
-  double _translationOffset(BuildContext context) => _arrowLength(context) * -0.4;
+  double _translationOffset(BuildContext context) =>
+      _arrowLength(context) * -0.4;
   @override
   Widget build(BuildContext context) {
     Animation animation = listenable;
