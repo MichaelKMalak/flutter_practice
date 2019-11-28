@@ -23,7 +23,14 @@ const Map<Gender, String> _GENDER_SVG = {
 //UI components
 class GenderCard extends StatefulWidget {
   final Gender gender;
-  const GenderCard({Key key, this.gender}) : super(key: key);
+  final ValueChanged<Gender> onChanged;
+
+  const GenderCard({
+    Key key,
+    this.gender = Gender.other,
+    this.onChanged,
+  }) : super(key: key);
+
   @override
   _GenderCardState createState() => _GenderCardState();
 }
@@ -107,9 +114,8 @@ class _GenderCardState extends State<GenderCard>
   }
 
   void _setSelectedGender(Gender gender) {
-    setState(() => selectedGender = gender);
+    widget.onChanged(gender);
     _arrowAnimationController.animateTo(
-      //<--- Animate the arrow
       _genderAngle[gender],
       duration: Duration(milliseconds: 150),
     );

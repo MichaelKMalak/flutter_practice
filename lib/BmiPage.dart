@@ -1,9 +1,11 @@
+import 'package:bmi_calculator/ResultsPage.dart';
 import 'package:flutter/material.dart';
 import 'height_card.dart';
 import 'package:bmi_calculator/BMItheme.dart';
 import 'weight_card.dart';
 import 'gender_card.dart';
 import 'utils.dart' show screenAwareSize;
+import 'gender.dart';
 
 class BmiPage extends StatefulWidget {
   @override
@@ -11,6 +13,10 @@ class BmiPage extends StatefulWidget {
 }
 
 class _BmiPageState extends State<BmiPage> {
+  Gender gender = Gender.other;
+  int height = 180;
+  int weight = 70;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,9 +50,32 @@ class _BmiPageState extends State<BmiPage> {
       alignment: Alignment.center,
       height: screenAwareSize(LARGE_PADDING, context),
       width: double.infinity,
-      child: Switch(value: true, onChanged: (val) {}),
+      child: //Switch(value: true, onChanged: (val) {}),
+      Center(
+        child: RaisedButton(
+            child: IconButton(
+              icon: Icon(Icons.arrow_forward_ios),
+              onPressed: _pushResultPage,
+            ),
+          onPressed: _pushResultPage,
+            )
+      )
     );
   }
+
+  void _pushResultPage(){
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultPage(
+            height: height,
+            weight: weight,
+            gender: gender,
+          )
+      ),
+    );
+  }
+
   Widget _buildCards(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
@@ -59,12 +88,21 @@ class _BmiPageState extends State<BmiPage> {
           Expanded(
             child: Column(
               children: <Widget>[
-                Expanded(child: GenderCard()),
-                Expanded(child: WeightCard()),
+                Expanded(child: GenderCard(
+                  gender: gender,
+                  onChanged: (val) => setState(() => gender = val),
+                )),
+                Expanded(child: WeightCard(
+                  weight: weight,
+                  onChanged: (val) => setState(() => weight = val),
+                )),
               ],
             ),
           ),
-          Expanded(child: HeightCard())
+          Expanded(child: HeightCard(
+            height: height,
+            onChanged: (val) => setState(() => height = val),
+          ))
         ],
       ),
     );

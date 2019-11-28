@@ -5,19 +5,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import 'card_title.dart';
 
-class WeightCard extends StatefulWidget {
-  @override
-  _WeightCardState createState() => _WeightCardState();
-}
+class WeightCard extends  StatelessWidget {
+  final int weight;
+  final ValueChanged<int> onChanged;
 
-class _WeightCardState extends State<WeightCard> {
-  int weight;
-
-  @override
-  void initState() {
-    super.initState();
-    weight = 70;
-  }
+  const WeightCard({Key key, this.weight = 70, this.onChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +42,7 @@ class _WeightCardState extends State<WeightCard> {
                   maxValue: 200,
                   width: constraints.maxWidth,
                   value: weight,
-                  onChanged: (val) => setState(() => weight = val),
+                  onChanged: (val) => onChanged(val),
                   ),
               ),
       ),

@@ -5,25 +5,31 @@ import 'dart:math' as math;
 
 import 'card_title.dart';
 
-class HeightCard extends StatefulWidget {
+class HeightCard extends StatelessWidget {
   final int height;
+  final ValueChanged<int> onChanged;
 
-  const HeightCard({Key key, this.height}) : super(key: key);
-
-  @override
-  _HeightCardState createState() => _HeightCardState();
-}
-class _HeightCardState extends State<HeightCard> {
-  int height;
-
-  @override
-  void initState() {
-    super.initState();
-    height = widget.height ?? 170;
-  }
+  const HeightCard({Key key, this.height = 170, this.onChanged})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+
+    Widget _drawSlider() {
+      return Expanded(
+        child: Padding(
+          padding: EdgeInsets.only(bottom: screenAwareSize(8.0, context)),
+          child: LayoutBuilder(builder: (context, constraints) {
+            return HeightPicker(
+              widgetHeight: constraints.maxHeight,
+              height: height,
+              onChange: (val) => onChanged(val),
+            );
+          }),
+        ),
+      );
+    }
+
     return Card(
       child: SizedBox(
         width: double.infinity,
@@ -41,21 +47,6 @@ class _HeightCardState extends State<HeightCard> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _drawSlider() {
-    return Expanded(
-      child: Padding(
-        padding: EdgeInsets.only(bottom: screenAwareSize(8.0, context)),
-        child: LayoutBuilder(builder: (context, constraints) {
-          return HeightPicker(
-            widgetHeight: constraints.maxHeight,
-            height: height,
-            onChange: (val) => setState(() => height = val),
-          );
-        }),
       ),
     );
   }

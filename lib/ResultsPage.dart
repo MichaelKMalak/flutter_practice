@@ -44,7 +44,7 @@ class _ResultPageState extends State<ResultPage> {
         top: screenAwareSize(MEDIUM_PADDING, context),
       ),
       child: Center(child: Text(
-        "Your BMI =",
+        "Your BMI is",
         style: HEADLINE_STYLE,
       )),
     );
@@ -55,9 +55,21 @@ class _ResultPageState extends State<ResultPage> {
       alignment: Alignment.center,
       height: screenAwareSize(LARGE_PADDING, context),
       width: double.infinity,
-      child: Switch(value: true, onChanged: (val) {}),
+      child:
+      RaisedButton(
+        child: IconButton(
+          icon: Icon(Icons.arrow_back_ios),
+          onPressed: _popResultPage,
+        ),
+        onPressed: _popResultPage,
+      ),
     );
   }
+
+  void _popResultPage(){
+    Navigator.pop(context);
+  }
+
 }
 
 class ResultCard extends StatelessWidget {
@@ -77,15 +89,15 @@ class ResultCard extends StatelessWidget {
           child: Column(children: [
             Text(
               '🔥',
-              style: TextStyle(fontSize: 120.0, color: Colors.redAccent),
+              style: TextStyle(fontSize: 60.0, color: Colors.redAccent),
             ),
             Text(
               bmi.toStringAsFixed(1),
-              style: TextStyle(fontSize: 240.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
             ),
             Text(
-              'BMI = ${bmi.toStringAsFixed(2)} kg/m²',
-              style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w700),
+              '(kg/m²)',
+              style: TextStyle(fontSize: 40.0),
             ),
           ]),
         ),
