@@ -55,14 +55,10 @@ class _ResultPageState extends State<ResultPage> {
       alignment: Alignment.center,
       height: screenAwareSize(LARGE_PADDING, context),
       width: double.infinity,
-      child:
-      RaisedButton(
-        child: IconButton(
-          icon: Icon(Icons.arrow_back_ios),
+      child: IconButton(
+          icon: Icon(Icons.arrow_back_ios, size: 30.0,),
           onPressed: _popResultPage,
         ),
-        onPressed: _popResultPage,
-      ),
     );
   }
 
@@ -93,11 +89,11 @@ class ResultCard extends StatelessWidget {
             ),
             Text(
               bmi.toStringAsFixed(1),
-              style: TextStyle(fontSize: 80.0, fontWeight: FontWeight.bold),
+              style: TextStyle(fontSize: 130.0, fontWeight: FontWeight.w900),
             ),
             Text(
               '(kg/m²)',
-              style: TextStyle(fontSize: 40.0),
+              style: TextStyle(fontSize: 30.0),
             ),
           ]),
         ),

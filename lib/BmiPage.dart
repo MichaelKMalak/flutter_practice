@@ -47,21 +47,19 @@ class _BmiPageState extends State<BmiPage> {
   }
   Widget _buildBottom (BuildContext context) {
     return Container(
-      alignment: Alignment.center,
-      height: screenAwareSize(LARGE_PADDING, context),
-      width: double.infinity,
-      child: //Switch(value: true, onChanged: (val) {}),
-      Center(
-        child: RaisedButton(
-            child: IconButton(
-              icon: Icon(Icons.arrow_forward_ios),
-              onPressed: _pushResultPage,
-            ),
-          onPressed: _pushResultPage,
+        alignment: Alignment.center,
+        height: screenAwareSize(LARGE_PADDING, context),
+        width: double.infinity,
+        child: //Switch(value: true, onChanged: (val) {}),
+        Center(
+            child: GestureDetector(
+                child: Text('🔥', style: new TextStyle(fontSize: 40.0),),
+              onTap: _pushResultPage,
             )
-      )
+        )
     );
   }
+
 
   void _pushResultPage(){
     Navigator.push(
