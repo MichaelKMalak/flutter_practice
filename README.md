@@ -15,4 +15,4 @@ This repository is consisting of different branches. Each one is an independent 
 	* A two-page app to calculate bmi from three different user inputs. 
 * [BMI-with-packages]()
 	* A two-page app to calculate bmi from three different user inputs. 
-           * Using [division](https://pub.dev/packages/division), [built_value](https://pub.dev/packages/built_value), [async_redux](https://github.com/marcglasberg/async_redux)
+	* Using [division](https://pub.dev/packages/division), [built_value](https://pub.dev/packages/built_value), [async_redux](https://github.com/marcglasberg/async_redux)
