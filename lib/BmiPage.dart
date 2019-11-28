@@ -31,7 +31,7 @@ class _BmiPageState extends State<BmiPage> {
     return Padding(
       padding: EdgeInsets.only(
         left: SMALL_PADDING,
-        top: screenAwareSize(MEDUIM_PADDING, context),
+        top: screenAwareSize(MEDIUM_PADDING, context),
       ),
       child: Center(child:Text(
         "BMI Calculator",
