@@ -44,7 +44,10 @@ class _ResultPageState extends State<ResultPage> {
         top: screenAwareSize(MEDIUM_PADDING, context),
       ),
       child: Center(child: Text(
-        "Your BMI is",
+        calculator.evaluateBMI(bmi: calculator.calculateBMI(
+          height: widget.height,
+          weight: widget.weight,
+        )),
         style: HEADLINE_STYLE,
       )),
     );
