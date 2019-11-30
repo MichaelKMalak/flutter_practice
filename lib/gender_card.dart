@@ -47,7 +47,7 @@ class _GenderCardState extends State<GenderCard>
         width: double.infinity,
         child: Padding(
           padding:
-              EdgeInsets.only(top: screenAwareSize(SMALL_PADDING, context)),
+              EdgeInsets.only(top: screenAwareSize(SMALL_DIM, context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -169,7 +169,7 @@ class DrawGenderIcon extends StatelessWidget {
         gender == Gender.female ? _genderAngle[gender] : -_genderAngle[gender];
 
     Widget icon = Padding(
-      padding: EdgeInsets.only(left: screenAwareSize(SMALL_PADDING, context)),
+      padding: EdgeInsets.only(left: screenAwareSize(SMALL_DIM, context)),
       child: SvgPicture.asset(
         _GENDER_SVG[gender],
         height: screenAwareSize(_iconSize, context),

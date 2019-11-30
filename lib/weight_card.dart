@@ -18,7 +18,7 @@ class WeightCard extends  StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         child: Padding(
-          padding: EdgeInsets.only(top: screenAwareSize(SMALL_PADDING, context)),
+          padding: EdgeInsets.only(top: screenAwareSize(SMALL_DIM, context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[

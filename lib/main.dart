@@ -1,5 +1,5 @@
+import 'package:bmi_calculator/NamePage.dart';
 import 'package:flutter/material.dart';
-import 'BmiPage.dart';
 import 'package:flutter/services.dart';
 import 'BMItheme.dart';
 
@@ -35,7 +35,9 @@ class _HomePageState extends State<HomePage> {
       theme: ThemeData(
         primarySwatch: PRIMARY_COLOR,
       ),
-      home: BmiPage(),
+      home: Scaffold(
+        body: NameCard(),
+      ),
     );
   }
 }

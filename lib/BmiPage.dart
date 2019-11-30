@@ -6,8 +6,13 @@ import 'weight_card.dart';
 import 'gender_card.dart';
 import 'utils.dart' show screenAwareSize;
 import 'gender.dart';
+import 'package:division/division.dart';
 
 class BmiPage extends StatefulWidget {
+  final String name;
+
+  const BmiPage({Key key, this.name}) : super(key: key);
+
   @override
   _BmiPageState createState() => _BmiPageState();
 }
@@ -34,21 +39,24 @@ class _BmiPageState extends State<BmiPage> {
   }
 
   Widget _buildTitle (BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: SMALL_PADDING,
-        top: screenAwareSize(MEDIUM_PADDING, context),
-      ),
-      child: Center(child:Text(
-        "BMI Calculator",
-        style: HEADLINE_STYLE,
-      )),
-    );
+    return Parent(
+        style: ParentStyle()
+          ..margin(
+              top: screenAwareSize(MEDIUM_DIM, context),
+              left: screenAwareSize(MEDIUM_DIM, context),
+          ),
+        gesture: Gestures()
+          ..isTap((isTapped) =>
+            setState(() => Navigator.pop(context))),
+        child:
+            Txt("Hi ${widget.name} 👋", style: headlineStyle),
+        );
   }
+
   Widget _buildBottom (BuildContext context) {
     return Container(
         alignment: Alignment.center,
-        height: screenAwareSize(LARGE_PADDING, context),
+        height: screenAwareSize(LARGE_DIM, context),
         width: double.infinity,
         child: //Switch(value: true, onChanged: (val) {}),
         Center(
@@ -77,9 +85,9 @@ class _BmiPageState extends State<BmiPage> {
   Widget _buildCards(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: SMALL_PADDING,
-        right: SMALL_PADDING,
-        top: screenAwareSize(SMALL_PADDING, context),
+        left: SMALL_DIM,
+        right: SMALL_DIM,
+        top: screenAwareSize(SMALL_DIM, context),
       ),
       child: Row(
         children: <Widget>[

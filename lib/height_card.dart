@@ -35,7 +35,7 @@ class HeightCard extends StatelessWidget {
         width: double.infinity,
         child: Padding(
           padding:
-              EdgeInsets.only(top: screenAwareSize(SMALL_PADDING, context)),
+              EdgeInsets.only(top: screenAwareSize(SMALL_DIM, context)),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
@@ -148,9 +148,9 @@ class _HeightPickerState extends State<HeightPicker> {
       alignment: Alignment.centerRight,
         child: Padding(
           padding: EdgeInsets.only(
-            right: screenAwareSize(SMALL_PADDING, context),
-            bottom: screenAwareSize(SMALL_PADDING, context),
-            top: screenAwareSize(SMALL_PADDING, context),
+            right: screenAwareSize(SMALL_DIM, context),
+            bottom: screenAwareSize(SMALL_DIM, context),
+            top: screenAwareSize(SMALL_DIM, context),
           ),
           child: Column(
             children: labels,
@@ -208,8 +208,8 @@ class SliderCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: screenAwareSize(MEDIUM_PADDING, context),
-      height: screenAwareSize(MEDIUM_PADDING, context),
+      width: screenAwareSize(MEDIUM_DIM, context),
+      height: screenAwareSize(MEDIUM_DIM, context),
       decoration: BoxDecoration(
         color: Theme.of(context).primaryColor,
         shape: BoxShape.circle,
@@ -217,7 +217,7 @@ class SliderCircle extends StatelessWidget {
       child: Icon(
         Icons.unfold_more,
         color: Colors.white,
-        size: 0.6 * screenAwareSize(MEDIUM_PADDING, context),
+        size: 0.6 * screenAwareSize(MEDIUM_DIM, context),
       ),
     );
   }

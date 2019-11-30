@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'gender.dart';
 import 'package:bmi_calculator/BMItheme.dart';
 import 'utils.dart';
+import 'package:division/division.dart';
 
 class ResultPage extends StatefulWidget {
   final int height;
@@ -40,8 +41,8 @@ class _ResultPageState extends State<ResultPage> {
   Widget _buildTitle(BuildContext context) {
     return Padding(
       padding: EdgeInsets.only(
-        left: SMALL_PADDING,
-        top: screenAwareSize(MEDIUM_PADDING, context),
+        left: SMALL_DIM,
+        top: screenAwareSize(MEDIUM_DIM, context),
       ),
       child: Center(child: Text(
         calculator.evaluateBMI(bmi: calculator.calculateBMI(
@@ -54,14 +55,15 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   Widget _buildBottom(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      height: screenAwareSize(LARGE_PADDING, context),
-      width: double.infinity,
-      child: IconButton(
-          icon: Icon(Icons.arrow_back_ios, size: 30.0,),
-          onPressed: _popResultPage,
-        ),
+    return Parent(
+      style: ParentStyle()
+        ..alignment.center()
+        ..margin(bottom: MEDIUM_DIM),
+
+      gesture: Gestures()
+        ..isTap((isTapped) =>
+            setState(() => _popResultPage())),
+      child: Icon(Icons.refresh, size: 40, color: Color(0xFF42526F)),
     );
   }
 
@@ -80,9 +82,9 @@ class ResultCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(MEDIUM_PADDING),
+      margin: EdgeInsets.all(SMALL_DIM),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: MEDIUM_PADDING),
+        padding: const EdgeInsets.symmetric(vertical: MEDIUM_DIM),
         child: Container(
           width: double.infinity,
           child: Column(children: [
