@@ -34,6 +34,7 @@ class _NameCardState extends State<NameCard> {
               style: editableStyle(context)
                 ..editable(
                   placeholder: "",
+                  maxLines: 1,
                   onEditingComplete: () { if(_name.isNotEmpty) _pushBmiPage();},
                   onChange: (newName) => setState(() => _name = newName),
                 )),
@@ -45,7 +46,7 @@ class _NameCardState extends State<NameCard> {
       context,
       MaterialPageRoute(
           builder: (context) => BmiPage(
-                name: _name,
+                name: _name.length > 10? _name.substring(0,10) : _name,
               )),
     );
   }

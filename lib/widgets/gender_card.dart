@@ -1,3 +1,4 @@
+import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:bmi_calculator/model/gender.dart';
@@ -124,19 +125,13 @@ class _GenderCardState extends State<GenderCard>
 class DrawCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      alignment: Alignment.center,
-      children: <Widget>[
-        Container(
-          width: circleRadius(context),
-          height: circleRadius(context),
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: PRIMARY_COLOR,
-          ),
-        ),
-      ],
-    );
+  return Parent(
+    style: ParentStyle()
+      ..alignment.center()
+      ..background.color(PRIMARY_COLOR)
+      ..height(circleRadius(context))
+      ..circle(),
+  );
   }
 }
 

@@ -47,7 +47,7 @@ class _BmiPageState extends State<BmiPage> {
           ),
         gesture: Gestures()
           ..isTap((isTapped) =>
-            setState(() => Navigator.pop(context))),
+            setState(() => Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName)))),
         child:
             Txt("Hi ${widget.name} 👋", style: headlineStyle),
         );

@@ -47,18 +47,28 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   Widget _buildTitle(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: SMALL_DIM,
-        top: screenAwareSize(MEDIUM_DIM, context),
-      ),
-      child: Center(
-          child: Text(
-        bmiEvaluation,
-        style: HEADLINE_STYLE,
-      )),
-    );
+  return Parent(
+    style: ParentStyle()
+      ..margin(
+          top: MEDIUM_DIM
+      )
+      ..alignment.center(),
+    child: Txt("You are $bmiEvaluation",
+      style: cardTitleStyle
+    ),
+  );
   }
+  void _popResultPage() =>
+      Navigator.pop(context);
+
+
+  void _popTillNamePage() =>
+      Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+
+
+  void _share() =>
+      Share.share("My BMI = $bmi. I am ${bmiEvaluation.toLowerCase()}.");
+
 
   Widget _buildBottom(BuildContext context) {
     return Parent(
@@ -83,22 +93,14 @@ class _ResultPageState extends State<ResultPage> {
                   icon: Icon(Icons.share),
                   iconSize: 30,
                   color: SECONDARY_BTN_COLOR,
-                  onPressed: () =>
-                      Share.share("My BMI = $bmi. I am ${bmiEvaluation.toLowerCase()}."),
+                  onPressed: () => _share(),
                   tooltip: "Share",
                 )
               ]),
         );
   }
-
-  void _popResultPage() {
-    Navigator.pop(context);
-  }
-
-  void _popTillNamePage() {
-    Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
-  }
 }
+
 
 class ResultCard extends StatelessWidget {
   final String bmi;
@@ -107,28 +109,27 @@ class ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(SMALL_DIM),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: MEDIUM_DIM),
-        child: Container(
-          width: double.infinity,
-          child: Column(children: [
-            Text(
-              '🔥',
-              style: TextStyle(fontSize: 60.0, color: Colors.redAccent),
-            ),
-            Text(
-              bmi,
-              style: TextStyle(fontSize: 130.0, fontWeight: FontWeight.w900),
-            ),
-            Text(
-              '(kg/m²)',
-              style: TextStyle(fontSize: 30.0),
-            ),
+  final ParentStyle cardStyle = ParentStyle()
+    ..alignment.center()
+    ..alignmentContent.center()
+    ..background.color(Colors.white)
+    ..margin(all: MEDIUM_DIM)
+    ..padding(horizontal: 30.0, vertical: 30.0)
+    ..elevation(10, color: hex('#3977FF'))
+    ..scale(1.0)
+    ..borderRadius(all: 20.0)
+    ..ripple(true);
+
+    return Parent (
+      style: cardStyle,
+      child: Column(children: [
+            Txt('🔥',
+              style: headlineStyle,),
+            Txt(bmi,
+              style: resultStyle,),
+            Txt('(kg/m²)',
+              style: headlineStyle,),
           ]),
-        ),
-      ),
     );
   }
 }

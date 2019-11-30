@@ -16,9 +16,9 @@ const double MEDIUM_DIM = 56.0;
 const double LARGE_DIM = 108.0;
 
 const double SMALL_FONT = 14.0;
-const double MEDIUM_FONT = 20.0;
+const double MEDIUM_FONT = 24.0;
 const double LARGE_FONT = 40.0;
-
+const double XLARGE_FONT = 100.0;
 
 //To convert the design value to device value so that proportions will remain the same
 double screenAwareSize(double size, BuildContext context) {
@@ -41,10 +41,11 @@ TxtStyle headlineStyle = TxtStyle()
   ..textColor(PRIMARY_TXT_COLOR)
   ..fontSize(LARGE_FONT);
 
-const TextStyle HEADLINE_STYLE = const TextStyle(letterSpacing: 2.0,
-    fontWeight: FontWeight.bold,
-    fontSize: 50.0,
-    color: PRIMARY_TXT_COLOR);
+TxtStyle resultStyle = TxtStyle()
+  ..letterSpacing(2.0)
+  ..bold()
+  ..textColor(PRIMARY_TXT_COLOR)
+  ..fontSize(XLARGE_FONT);
 
 const TextStyle WEIGHT_TEXT_STYLE = const TextStyle(
   color: Color.fromRGBO(196, 197, 203, 1.0),
