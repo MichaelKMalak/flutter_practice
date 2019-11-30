@@ -1,8 +1,8 @@
-import 'package:bmi_calculator/calculator.dart' as calculator;
+import 'package:bmi_calculator/logic/calculator.dart' as calculator;
 import 'package:flutter/material.dart';
-import 'gender.dart';
-import 'package:bmi_calculator/BMItheme.dart';
-import 'utils.dart';
+import '../model/gender.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import '../widgets/utils.dart';
 import 'package:division/division.dart';
 
 class ResultPage extends StatefulWidget {

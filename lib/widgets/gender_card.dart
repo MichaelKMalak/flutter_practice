@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/BMItheme.dart';
-import 'package:bmi_calculator/gender.dart';
-import 'package:bmi_calculator/card_title.dart';
-import 'package:bmi_calculator/utils.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import 'package:bmi_calculator/model/gender.dart';
+import 'package:bmi_calculator/widgets/card_title.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'dart:math' as math;
 

@@ -1,7 +1,7 @@
-import 'package:bmi_calculator/BmiPage.dart';
+import 'package:bmi_calculator/screens/BmiPage.dart';
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/BMItheme.dart';
-import 'utils.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import '../widgets/utils.dart';
 import 'package:division/division.dart';
 
 class NameCard extends StatefulWidget {
@@ -22,7 +22,7 @@ class _NameCardState extends State<NameCard> {
     ..borderRadius(all: 10)
     ..alignment.center()
     ..background.color(Colors.grey[200])
-    ..animate(300, Curves.easeOut);
+    ..ripple(true, splashColor: Colors.black.withOpacity(0.1));
 
   @override
   Widget build(BuildContext context) {

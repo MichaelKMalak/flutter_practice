@@ -1,8 +1,6 @@
-import 'package:bmi_calculator/BMItheme.dart';
-import 'package:bmi_calculator/utils.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-
 import 'card_title.dart';
 
 class WeightCard extends  StatelessWidget {

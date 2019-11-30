@@ -1,7 +1,7 @@
-import 'package:bmi_calculator/NamePage.dart';
+import 'package:bmi_calculator/screens/NamePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'BMItheme.dart';
+import 'widgets/utils.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations(

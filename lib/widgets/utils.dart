@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:division/division.dart';
 
+
+const double BASE_HEIGHT = 650.0;
+
 const Color PRIMARY_COLOR = Colors.blue;
 const Color SECONDARY_COLOR = Colors.blueGrey;
 const Color PRIMARY_TXT_COLOR =   Color(4278190080);
@@ -16,6 +19,11 @@ const double SMALL_FONT = 14.0;
 const double MEDIUM_FONT = 20.0;
 const double LARGE_FONT = 40.0;
 
+
+//To convert the design value to device value so that proportions will remain the same
+double screenAwareSize(double size, BuildContext context) {
+  return size * MediaQuery.of(context).size.shortestSide  / BASE_HEIGHT;
+}
 
 TxtStyle cardTitleStyle = TxtStyle()
   ..bold()

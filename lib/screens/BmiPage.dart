@@ -1,11 +1,11 @@
-import 'package:bmi_calculator/ResultsPage.dart';
+import 'package:bmi_calculator/screens/ResultsPage.dart';
 import 'package:flutter/material.dart';
-import 'height_card.dart';
-import 'package:bmi_calculator/BMItheme.dart';
-import 'weight_card.dart';
-import 'gender_card.dart';
-import 'utils.dart' show screenAwareSize;
-import 'gender.dart';
+import '../widgets/height_card.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import '../widgets/weight_card.dart';
+import '../widgets/gender_card.dart';
+import '../widgets/utils.dart' show screenAwareSize;
+import '../model/gender.dart';
 import 'package:division/division.dart';
 
 class BmiPage extends StatefulWidget {

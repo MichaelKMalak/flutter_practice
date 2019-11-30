@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:bmi_calculator/BMItheme.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:division/division.dart';
 
 class CardTitle extends StatelessWidget {
