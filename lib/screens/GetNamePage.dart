@@ -1,8 +1,10 @@
-import 'package:bmi_calculator/screens/HomePage.dart';
+import 'package:bmi_calculator/screens/MainPage.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import '../widgets/utils.dart';
 import 'package:division/division.dart';
+import 'package:bmi_calculator/strings/text.dart';
+
 
 class NameCard extends StatefulWidget {
   @override
@@ -29,7 +31,7 @@ class _NameCardState extends State<NameCard> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Txt('What is your name?', style: cardTitleStyle),
+          Txt(WHAT_IS_YOUR_NAME_TXT, style: cardTitleStyle),
           Txt('',
               style: editableStyle(context)
                 ..editable(

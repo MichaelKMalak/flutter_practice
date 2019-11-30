@@ -5,6 +5,8 @@ import 'package:bmi_calculator/widgets/utils.dart';
 import '../widgets/utils.dart';
 import 'package:division/division.dart';
 import 'package:share/share.dart';
+import 'package:bmi_calculator/strings/text.dart';
+
 
 class ResultPage extends StatefulWidget {
   final int height;
@@ -47,15 +49,14 @@ class _ResultPageState extends State<ResultPage> {
   }
 
   Widget _buildTitle(BuildContext context) {
+    final ParentStyle titleStyle = ParentStyle()
+      ..margin(top: MEDIUM_DIM)
+      ..alignment.center();
+
   return Parent(
-    style: ParentStyle()
-      ..margin(
-          top: MEDIUM_DIM
-      )
-      ..alignment.center(),
-    child: Txt("You are $bmiEvaluation",
-      style: cardTitleStyle
-    ),
+    style: titleStyle,
+    child: Txt(YOU_ARE_TXT + bmiEvaluation,
+      style: cardTitleStyle),
   );
   }
   void _popResultPage() =>
@@ -67,7 +68,7 @@ class _ResultPageState extends State<ResultPage> {
 
 
   void _share() =>
-      Share.share("My BMI = $bmi. I am ${bmiEvaluation.toLowerCase()}.");
+      Share.share(MY_BMI_TXT + bmi + I_AM_TXT + bmiEvaluation);
 
 
   Widget _buildBottom(BuildContext context) {
@@ -80,21 +81,21 @@ class _ResultPageState extends State<ResultPage> {
                   iconSize: 30,
                   color: SECONDARY_BTN_COLOR,
                   onPressed: _popResultPage,
-                  tooltip: "Back",
+                  tooltip: BACK_TXT,
                 ),
                 IconButton(
                   icon: Icon(Icons.refresh),
                   iconSize: 50,
                   color: PRIMARY_BTN_COLOR,
                   onPressed: () => _popTillNamePage(),
-                  tooltip: "Restart",
+                  tooltip: RESTART_TXT,
                 ),
                 IconButton(
                   icon: Icon(Icons.share),
                   iconSize: 30,
                   color: SECONDARY_BTN_COLOR,
                   onPressed: () => _share(),
-                  tooltip: "Share",
+                  tooltip: SHARE_TXT,
                 )
               ]),
         );
@@ -109,16 +110,6 @@ class ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  final ParentStyle cardStyle = ParentStyle()
-    ..alignment.center()
-    ..alignmentContent.center()
-    ..background.color(Colors.white)
-    ..margin(all: MEDIUM_DIM)
-    ..padding(horizontal: 30.0, vertical: 30.0)
-    ..elevation(10, color: hex('#3977FF'))
-    ..scale(1.0)
-    ..borderRadius(all: 20.0)
-    ..ripple(true);
 
     return Parent (
       style: cardStyle,

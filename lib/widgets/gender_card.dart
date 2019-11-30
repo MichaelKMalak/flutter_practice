@@ -4,6 +4,8 @@ import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:bmi_calculator/model/gender.dart';
 import 'package:bmi_calculator/widgets/card_title.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bmi_calculator/strings/paths.dart';
+import 'package:bmi_calculator/strings/text.dart';
 import 'dart:math' as math;
 
 //constants
@@ -15,9 +17,9 @@ const Map<Gender, double> _genderAngle = {
   Gender.male: _DEFAULT_ANGLE,
 };
 const Map<Gender, String> _GENDER_SVG = {
-  Gender.female: "images/gender_female.svg",
-  Gender.other: "images/gender_other.svg",
-  Gender.male: "images/gender_male.svg",
+  Gender.female: FEMALE_SVG_PATH,
+  Gender.other: OTHER_SVG_PATH,
+  Gender.male: MALE_SVG_PATH,
 };
 
 //UI components
@@ -51,7 +53,7 @@ class _GenderCardState extends State<GenderCard>
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              CardTitle("GENDER"),
+              CardTitle(GENDER_TXT),
               Padding(
                 padding: EdgeInsets.only(
                     top: screenAwareSize(25.0, context)),
@@ -240,7 +242,7 @@ class DrawArrow extends AnimatedWidget {
         child: Transform.rotate(
           angle: -_DEFAULT_ANGLE,
           child: SvgPicture.asset(
-            "images/gender_arrow.svg",
+            GENDER_ARROW_SVG_PATH,
             height: _arrowLength(context),
             width: _arrowLength(context),
             color: Colors.white,

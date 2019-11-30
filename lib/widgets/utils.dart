@@ -47,6 +47,16 @@ TxtStyle resultStyle = TxtStyle()
   ..textColor(PRIMARY_TXT_COLOR)
   ..fontSize(XLARGE_FONT);
 
+ParentStyle cardStyle = ParentStyle()
+  ..alignment.center()
+  ..alignmentContent.center()
+  ..background.color(Colors.white)
+  ..margin(all: MEDIUM_DIM)
+  ..padding(horizontal: 30.0, vertical: 30.0)
+  ..elevation(10, color: hex('#3977FF'))
+  ..scale(1.0)
+  ..borderRadius(all: 20.0);
+
 const TextStyle WEIGHT_TEXT_STYLE = const TextStyle(
   color: Color.fromRGBO(196, 197, 203, 1.0),
   fontSize: 16.0,

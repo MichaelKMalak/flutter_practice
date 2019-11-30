@@ -2,6 +2,7 @@ import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'card_title.dart';
+import 'package:bmi_calculator/strings/text.dart';
 
 class HeightCard extends StatelessWidget {
   final int height;
@@ -38,8 +39,8 @@ class HeightCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CardTitle(
-                "HEIGHT",
-                subtitle: ("(cm)"),
+                HEIGHT_TXT,
+                subtitle: HEIGHT_SUBTITLE_TXT,
               ),
               _drawSlider(),
             ],

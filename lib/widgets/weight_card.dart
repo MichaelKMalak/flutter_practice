@@ -1,6 +1,8 @@
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bmi_calculator/strings/paths.dart';
+import 'package:bmi_calculator/strings/text.dart';
 import 'card_title.dart';
 
 class WeightCard extends  StatelessWidget {
@@ -20,7 +22,7 @@ class WeightCard extends  StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              CardTitle("WEIGHT", subtitle: "(KG)"),
+              CardTitle(WEIGHT_TXT, subtitle: WEIGHT_SUBTITLE_TXT),
               _drawSlider(),
             ],
           ),
@@ -70,7 +72,7 @@ class WeightBackground extends StatelessWidget {
           child: child,
         ),
         SvgPicture.asset(
-          "images/weight_arrow.svg",
+          WEIGHT_ARROW_SVG_PATH,
           color: PRIMARY_COLOR,
           height: screenAwareSize(20.0, context),
           width: screenAwareSize(35.0, context),
