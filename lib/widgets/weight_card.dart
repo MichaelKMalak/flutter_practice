@@ -71,6 +71,7 @@ class WeightBackground extends StatelessWidget {
         ),
         SvgPicture.asset(
           "images/weight_arrow.svg",
+          color: PRIMARY_COLOR,
           height: screenAwareSize(20.0, context),
           width: screenAwareSize(35.0, context),
         ),

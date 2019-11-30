@@ -132,7 +132,7 @@ class DrawCircle extends StatelessWidget {
           height: circleRadius(context),
           decoration: BoxDecoration(
             shape: BoxShape.circle,
-            color: SECONDARY_COLOR,
+            color: PRIMARY_COLOR,
           ),
         ),
       ],

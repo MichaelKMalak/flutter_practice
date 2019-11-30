@@ -4,19 +4,32 @@ import '../model/gender.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import '../widgets/utils.dart';
 import 'package:division/division.dart';
+import 'package:share/share.dart';
 
 class ResultPage extends StatefulWidget {
   final int height;
   final int weight;
   final Gender gender;
 
-  const ResultPage({Key key, this.height, this.weight, this.gender}) : super(key: key);
+  const ResultPage({Key key, this.height, this.weight, this.gender})
+      : super(key: key);
 
   @override
   _ResultPageState createState() => _ResultPageState();
 }
 
 class _ResultPageState extends State<ResultPage> {
+  String get bmi => calculator
+      .calculateBMI(
+        height: widget.height,
+        weight: widget.weight,
+      )
+      .toStringAsFixed(1);
+
+  String get bmiEvaluation => calculator.evaluateBMI(
+        bmiStr: bmi,
+      );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,12 +38,7 @@ class _ResultPageState extends State<ResultPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildTitle(context),
-            Expanded(child: ResultCard(
-                bmi:calculator.calculateBMI(
-                  height: widget.height,
-                  weight: widget.weight,
-                ))
-            ),
+            Expanded(child: ResultCard(bmi: bmi)),
             _buildBottom(context),
           ],
         ),
@@ -44,11 +52,9 @@ class _ResultPageState extends State<ResultPage> {
         left: SMALL_DIM,
         top: screenAwareSize(MEDIUM_DIM, context),
       ),
-      child: Center(child: Text(
-        calculator.evaluateBMI(bmi: calculator.calculateBMI(
-          height: widget.height,
-          weight: widget.weight,
-        )),
+      child: Center(
+          child: Text(
+        bmiEvaluation,
         style: HEADLINE_STYLE,
       )),
     );
@@ -56,28 +62,48 @@ class _ResultPageState extends State<ResultPage> {
 
   Widget _buildBottom(BuildContext context) {
     return Parent(
-      style: ParentStyle()
-        ..alignment.center()
-        ..margin(bottom: MEDIUM_DIM),
-
-      gesture: Gestures()
-        ..isTap((isTapped) =>
-            setState(() => _popResultPage())),
-      child: Icon(Icons.refresh, size: 40, color: Color(0xFF42526F)),
-    );
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                IconButton(
+                  icon: Icon(Icons.arrow_back_ios),
+                  iconSize: 30,
+                  color: SECONDARY_BTN_COLOR,
+                  onPressed: _popResultPage,
+                  tooltip: "Back",
+                ),
+                IconButton(
+                  icon: Icon(Icons.refresh),
+                  iconSize: 50,
+                  color: PRIMARY_BTN_COLOR,
+                  onPressed: () => _popTillNamePage(),
+                  tooltip: "Restart",
+                ),
+                IconButton(
+                  icon: Icon(Icons.share),
+                  iconSize: 30,
+                  color: SECONDARY_BTN_COLOR,
+                  onPressed: () =>
+                      Share.share("My BMI = $bmi. I am ${bmiEvaluation.toLowerCase()}."),
+                  tooltip: "Share",
+                )
+              ]),
+        );
   }
 
-  void _popResultPage(){
+  void _popResultPage() {
     Navigator.pop(context);
   }
 
+  void _popTillNamePage() {
+    Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
+  }
 }
 
 class ResultCard extends StatelessWidget {
-  final double bmi;
+  final String bmi;
 
-  ResultCard({Key key, this.bmi})
-      : super(key: key);
+  ResultCard({Key key, this.bmi}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +119,7 @@ class ResultCard extends StatelessWidget {
               style: TextStyle(fontSize: 60.0, color: Colors.redAccent),
             ),
             Text(
-              bmi.toStringAsFixed(1),
+              bmi,
               style: TextStyle(fontSize: 130.0, fontWeight: FontWeight.w900),
             ),
             Text(

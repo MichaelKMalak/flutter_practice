@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/screens/BmiPage.dart';
+import 'package:bmi_calculator/screens/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import '../widgets/utils.dart';
@@ -34,8 +34,7 @@ class _NameCardState extends State<NameCard> {
               style: editableStyle(context)
                 ..editable(
                   placeholder: "",
-                  maxLines: 1,
-                  onEditingComplete: () {if(_name.isNotEmpty) _pushBmiPage();},
+                  onEditingComplete: () { if(_name.isNotEmpty) _pushBmiPage();},
                   onChange: (newName) => setState(() => _name = newName),
                 )),
         ]);
