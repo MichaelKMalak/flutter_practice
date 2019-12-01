@@ -51,8 +51,6 @@ ParentStyle cardStyle = ParentStyle()
   ..alignment.center()
   ..alignmentContent.center()
   ..background.color(Colors.white)
-  ..margin(all: MEDIUM_DIM)
-  ..padding(horizontal: 30.0, vertical: 30.0)
   ..elevation(10, color: hex('#3977FF'))
   ..scale(1.0)
   ..borderRadius(all: 20.0);

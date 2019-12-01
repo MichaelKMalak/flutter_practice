@@ -110,9 +110,14 @@ class ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
+    final ParentStyle resultCardStyle = cardStyle ..add(
+        ParentStyle()
+          ..margin(all: MEDIUM_DIM)
+          ..padding(horizontal: SMALL_DIM, vertical: SMALL_DIM),
+      override: true,
+    );
     return Parent (
-      style: cardStyle,
+      style: resultCardStyle,
       child: Column(children: [
             Txt('🔥',
               style: headlineStyle,),
