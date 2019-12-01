@@ -51,26 +51,13 @@ ParentStyle cardStyle = ParentStyle()
   ..alignment.center()
   ..alignmentContent.center()
   ..background.color(Colors.white)
-  ..elevation(10, color: hex('#3977FF'))
+  ..elevation(3, color: hex('#3977FF'))
   ..scale(1.0)
   ..borderRadius(all: 20.0);
 
-const TextStyle WEIGHT_TEXT_STYLE = const TextStyle(
-  color: Color.fromRGBO(196, 197, 203, 1.0),
-  fontSize: 16.0,
-);
-const TextStyle HIGHLIGHTED_WEIGHT_TEXT_STYLE = const TextStyle(
-  color: SECONDARY_TXT_COLOR,
-  fontSize: 32.0,
 
-);
 const TextStyle LABELS_TEXT_STYLE = const TextStyle(
   color: SECONDARY_COLOR,
   fontSize: 16.0,
+);
 
-);
-const TextStyle HIGHLIGHTED_HEIGHT_TEXT_STYLE = const TextStyle(
-  fontSize: 20.0,
-  color: SECONDARY_TXT_COLOR,
-  fontWeight: FontWeight.w600,
-);

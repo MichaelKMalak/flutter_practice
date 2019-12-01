@@ -72,7 +72,9 @@ class _ResultPageState extends State<ResultPage> {
 
 
   Widget _buildBottom(BuildContext context) {
+    final ParentStyle bottomStyle = ParentStyle()..margin(vertical: 15.0);
     return Parent(
+          style: bottomStyle,
           child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: <Widget>[
@@ -112,7 +114,7 @@ class ResultCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ParentStyle resultCardStyle = cardStyle ..add(
         ParentStyle()
-          ..margin(all: MEDIUM_DIM)
+          ..margin(top: MEDIUM_DIM, horizontal: MEDIUM_DIM)
           ..padding(horizontal: SMALL_DIM, vertical: SMALL_DIM),
       override: true,
     );

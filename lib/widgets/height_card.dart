@@ -1,4 +1,5 @@
 import 'package:bmi_calculator/widgets/utils.dart';
+import 'package:division/division.dart';
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'card_title.dart';
@@ -15,9 +16,11 @@ class HeightCard extends StatelessWidget {
   Widget build(BuildContext context) {
 
     Widget _drawSlider() {
+    final ParentStyle sliderStyle = ParentStyle()
+      ..padding(bottom: screenAwareSize(8.0, context));
       return Expanded(
-        child: Padding(
-          padding: EdgeInsets.only(bottom: screenAwareSize(8.0, context)),
+        child: Parent(
+          style: sliderStyle,
           child: LayoutBuilder(builder: (context, constraints) {
             return HeightPicker(
               widgetHeight: constraints.maxHeight,
@@ -29,13 +32,17 @@ class HeightCard extends StatelessWidget {
       );
     }
 
-    return Card(
-      child: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding:
-              EdgeInsets.only(top: screenAwareSize(SMALL_DIM, context)),
-          child: Column(
+    final ParentStyle heightCardStyle = cardStyle ..add(
+      ParentStyle()
+        ..width(double.infinity)
+        ..margin(all: 0.0, left: 5.0)
+        ..padding(top: screenAwareSize(SMALL_DIM, context)),
+      override: true,
+    );
+
+    return Parent(
+      style: heightCardStyle,
+      child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               CardTitle(
@@ -45,9 +52,7 @@ class HeightCard extends StatelessWidget {
               _drawSlider(),
             ],
           ),
-        ),
-      ),
-    );
+        );
   }
 }
 
@@ -143,19 +148,19 @@ class _HeightPickerState extends State<HeightPicker> {
         );
       },
     );
-    return Align(
-      alignment: Alignment.centerRight,
-        child: Padding(
-          padding: EdgeInsets.only(
-            right: screenAwareSize(SMALL_DIM, context),
-            bottom: screenAwareSize(SMALL_DIM, context),
-            top: screenAwareSize(SMALL_DIM, context),
-          ),
-          child: Column(
-            children: labels,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          ),
-        ),
+    final ParentStyle labelsStyle = ParentStyle()
+      ..alignment.centerRight()
+      ..padding(
+          right: screenAwareSize(SMALL_DIM, context),
+          bottom: screenAwareSize(SMALL_DIM, context),
+          top: screenAwareSize(SMALL_DIM, context));
+
+    return Parent(
+      style: labelsStyle,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: labels,
+      ),
     );
   }
 }
@@ -204,15 +209,17 @@ class SliderLine extends StatelessWidget {
 }
 
 class SliderCircle extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: screenAwareSize(MEDIUM_DIM, context),
-      height: screenAwareSize(MEDIUM_DIM, context),
-      decoration: BoxDecoration(
-        color: Theme.of(context).primaryColor,
-        shape: BoxShape.circle,
-      ),
+    final ParentStyle sliderCircleStyle = ParentStyle()
+      ..width(screenAwareSize(MEDIUM_DIM, context))
+      ..height(screenAwareSize(MEDIUM_DIM, context))
+      ..background.color(PRIMARY_COLOR)
+      ..circle();
+
+    return Parent(
+      style: sliderCircleStyle,
       child: Icon(
         Icons.unfold_more,
         color: Colors.white,
@@ -229,14 +236,22 @@ class SliderLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: screenAwareSize(4.0, context),
-        bottom: screenAwareSize(2.0, context),
-      ),
-      child: Text(
-        "$height",
-        style: HIGHLIGHTED_HEIGHT_TEXT_STYLE,
+
+    final TxtStyle highlightedTextStyle =  TxtStyle()
+      ..fontSize(20.0)
+      ..textColor(SECONDARY_TXT_COLOR)
+      ..fontWeight(FontWeight.w600);
+
+    final ParentStyle highlightedStyle = ParentStyle()
+    ..padding(
+      left: screenAwareSize(4.0, context),
+      bottom: screenAwareSize(2.0, context),);
+
+    return Parent(
+      style: highlightedStyle,
+      child: Txt(
+        height.toString(),
+        style: highlightedTextStyle,
       ),
     );
   }

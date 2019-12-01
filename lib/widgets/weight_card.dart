@@ -2,10 +2,11 @@ import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bmi_calculator/strings/paths.dart';
+import 'package:division/division.dart';
 import 'package:bmi_calculator/strings/text.dart';
 import 'card_title.dart';
 
-class WeightCard extends  StatelessWidget {
+class WeightCard extends StatelessWidget {
   final int weight;
   final ValueChanged<int> onChanged;
 
@@ -14,41 +15,43 @@ class WeightCard extends  StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: SizedBox(
-        width: double.infinity,
-        child: Padding(
-          padding: EdgeInsets.only(top: screenAwareSize(SMALL_DIM, context)),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              CardTitle(WEIGHT_TXT, subtitle: WEIGHT_SUBTITLE_TXT),
-              _drawSlider(),
-            ],
-          ),
-        ),
+    final ParentStyle weightCardStyle = cardStyle
+      ..add(
+        ParentStyle()
+          ..width(double.infinity)
+          ..margin(all: 1.0, top: 5.0)
+          ..padding(top: SMALL_DIM),
+        override: true,
+      );
+
+    return Parent(
+      style: weightCardStyle,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          CardTitle(WEIGHT_TXT, subtitle: WEIGHT_SUBTITLE_TXT),
+          _drawSlider(),
+        ],
       ),
     );
   }
+
   Widget _drawSlider() {
-    return Expanded(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: WeightBackground(
-              child: LayoutBuilder(
-                builder: (context, constraints) => WeightSlider(
-                  minValue: 30,
-                  maxValue: 200,
-                  width: constraints.maxWidth,
-                  value: weight,
-                  onChanged: (val) => onChanged(val),
-                  ),
-              ),
+    return Parent(
+      style: ParentStyle()..alignment.center()
+      ..padding(vertical: SMALL_DIM, horizontal: SMALL_DIM),
+      child: WeightBackground(
+         child: LayoutBuilder(
+           builder: (context, constraints) =>
+               WeightSlider(minValue: 30,
+                 maxValue: 200,
+                 width: constraints.maxWidth,
+                 value: weight,
+                 onChanged: (val) => onChanged(val),
+               ),
+         ),
       ),
-    )
-    )
-    );
+      );
   }
 }
 
@@ -57,25 +60,32 @@ class WeightBackground extends StatelessWidget {
 
   const WeightBackground({Key key, this.child}) : super(key: key);
 
-  @override
+
+
   Widget build(BuildContext context) {
+
+    final ParentStyle weightCardStyle = ParentStyle()
+      ..height(screenAwareSize(200.0, context))
+      ..background.color(Colors.grey[200])
+      ..borderRadius(all: screenAwareSize(250.0, context));
+
+    final ParentStyle weightArrowStyle = ParentStyle()
+      ..height(screenAwareSize(20.0, context))
+      ..width(screenAwareSize(35.0, context));
+
     return Stack(
       alignment: Alignment.bottomCenter,
       children: <Widget>[
-        Container(
-          height: screenAwareSize(200.0, context),
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(244, 244, 244, 1.0),
-            borderRadius:
-            new BorderRadius.circular(screenAwareSize(250.0, context)),
-          ),
+        Parent(
+          style: weightCardStyle,
           child: child,
         ),
-        SvgPicture.asset(
-          WEIGHT_ARROW_SVG_PATH,
-          color: PRIMARY_COLOR,
-          height: screenAwareSize(20.0, context),
-          width: screenAwareSize(35.0, context),
+        Parent(
+          style: weightArrowStyle,
+          child: SvgPicture.asset(
+            WEIGHT_ARROW_SVG_PATH,
+            color: PRIMARY_COLOR,
+          ),
         ),
       ],
     );
@@ -108,30 +118,30 @@ class WeightSlider extends StatelessWidget {
     return NotificationListener(
         onNotification: _onNotification,
         child: new ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemExtent: itemExtent,
-      itemCount: itemCount,
-      physics: BouncingScrollPhysics(),
-      itemBuilder: (BuildContext context, int index) {
-        final int value = _indexToValue(index);
-        bool isExtra = index == 0 || index == itemCount - 1;
-        return isExtra
-            ? new Container() //empty first and last element
-            : FittedBox(
-          child: Text(
-            value.toString(),
-            style: _getTextStyle(value),
-          ),
-          fit: BoxFit.scaleDown,
-        );
-      }
-    )
-    );
+            scrollDirection: Axis.horizontal,
+            itemExtent: itemExtent,
+            itemCount: itemCount,
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (BuildContext context, int index) {
+              final int value = _indexToValue(index);
+              bool isExtra = index == 0 || index == itemCount - 1;
+              return isExtra
+                  ? new Container() //empty first and last element
+                  : FittedBox(
+                child: Txt(
+                  value.toString(),
+                  style: _getTextStyle(value),
+                ),
+                fit: BoxFit.scaleDown,
+              );
+            }));
   }
+
   int _offsetToMiddleIndex(double offset) => (offset + width / 2) ~/ itemExtent;
   bool _onNotification(Notification notification) {
     if (notification is ScrollNotification) {
-      int middleValue = _indexToValue(_offsetToMiddleIndex(notification.metrics.pixels));
+      int middleValue =
+          _indexToValue(_offsetToMiddleIndex(notification.metrics.pixels));
 
       if (middleValue != value) {
         onChanged(middleValue);
@@ -139,10 +149,20 @@ class WeightSlider extends StatelessWidget {
     }
     return true;
   }
-  TextStyle _getTextStyle(int itemValue) {
-    return itemValue == value
-        ? HIGHLIGHTED_WEIGHT_TEXT_STYLE
-        : WEIGHT_TEXT_STYLE;
-  }
-}
 
+  TxtStyle _getTextStyle(int itemValue) {
+    return itemValue == value
+        ? highlightedNumbers
+        : normalNumbers;
+  }
+
+  final TxtStyle highlightedNumbers = TxtStyle()
+    ..textColor(SECONDARY_TXT_COLOR)
+    ..fontSize(LARGE_FONT);
+
+
+  final TxtStyle normalNumbers = TxtStyle()
+    ..textColor(Color.fromRGBO(196, 197, 203, 1.0))
+    ..fontSize(SMALL_FONT);
+
+}
