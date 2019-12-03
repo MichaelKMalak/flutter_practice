@@ -1,0 +1,218 @@
+[
+  {
+    "name": "android.local.jars:flutter.jar:31eef546a5bb5e3b1913287cd669bbc8a812b05a-0",
+    "index": 0,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "android.local.jars:flutter.jar:31eef546a5bb5e3b1913287cd669bbc8a812b05a-1",
+    "index": 1,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "android.local.jars:flutter.jar:31eef546a5bb5e3b1913287cd669bbc8a812b05a-2",
+    "index": 2,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "android.local.jars:flutter.jar:31eef546a5bb5e3b1913287cd669bbc8a812b05a-3",
+    "index": 3,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "android.local.jars:libs.jar:e25730c2e20e38c05c17e85d49bced1f6358d1f3-0",
+    "index": 4,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": false
+  },
+  {
+    "name": "android.local.jars:libs.jar:e25730c2e20e38c05c17e85d49bced1f6358d1f3-1",
+    "index": 5,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": false
+  },
+  {
+    "name": "android.local.jars:libs.jar:e25730c2e20e38c05c17e85d49bced1f6358d1f3-2",
+    "index": 6,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": false
+  },
+  {
+    "name": "android.local.jars:libs.jar:e25730c2e20e38c05c17e85d49bced1f6358d1f3-3",
+    "index": 7,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": false
+  },
+  {
+    "name": "org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.71",
+    "index": 8,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "org.jetbrains.kotlin:kotlin-stdlib:1.2.71",
+    "index": 9,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "org.jetbrains.kotlin:kotlin-stdlib-common:1.2.71",
+    "index": 10,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "org.jetbrains:annotations:13.0",
+    "index": 11,
+    "scopes": [
+      "EXTERNAL_LIBRARIES"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": ":share-0",
+    "index": 12,
+    "scopes": [
+      "SUB_PROJECTS"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": false
+  },
+  {
+    "name": ":share-1",
+    "index": 13,
+    "scopes": [
+      "SUB_PROJECTS"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": ":share-2",
+    "index": 14,
+    "scopes": [
+      "SUB_PROJECTS"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": ":share-3",
+    "index": 15,
+    "scopes": [
+      "SUB_PROJECTS"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "JAR",
+    "present": true
+  },
+  {
+    "name": "1586e3396a846b03625f49320f798369f5655bfa",
+    "index": 16,
+    "scopes": [
+      "PROJECT"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "DIRECTORY",
+    "present": true
+  },
+  {
+    "name": "ae41d320116e5d9b70a5c4cb510ba52fad967249",
+    "index": 17,
+    "scopes": [
+      "PROJECT"
+    ],
+    "types": [
+      "DEX_ARCHIVE"
+    ],
+    "format": "DIRECTORY",
+    "present": true
+  }
+]
