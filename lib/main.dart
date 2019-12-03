@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/screens/GetNamePage.dart';
+import 'package:bmi_calculator/screens/name_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'widgets/utils.dart';

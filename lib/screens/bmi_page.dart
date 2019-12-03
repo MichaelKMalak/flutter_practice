@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/screens/ResultsPage.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:flutter/material.dart';
 import '../widgets/height_card.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
