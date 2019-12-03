@@ -1,14 +1,12 @@
 import 'package:bmi_calculator/screens/name_page.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'widgets/utils.dart';
 import 'package:bmi_calculator/strings/text.dart';
+import 'package:flutter/material.dart';
+
+import 'widgets/utils.dart';
 
 
 void main() {
-  SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((_) => runApp(new MyApp()));
+  runApp(new MyApp());
 }
 
 class MyApp extends StatelessWidget {
