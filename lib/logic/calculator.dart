@@ -2,9 +2,8 @@ import 'dart:math' as math;
 
 //Note: I didn't take gender into consideration
 
-double _heightSquared(int height) => math.pow(height / 100, 2);
-
-double calculateBMI({int height, int weight}) => weight / _heightSquared(height);
+double calculateBMI({int height, int weight}) =>
+    weight / _heightSquared(height);
 
 String evaluateBMI({double bmi}) {
   if (bmi < 18.5)
@@ -16,3 +15,5 @@ String evaluateBMI({double bmi}) {
   else
     return "OBESE";
 }
+
+double _heightSquared(int height) => math.pow(height / 100, 2);

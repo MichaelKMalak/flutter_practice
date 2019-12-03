@@ -1,11 +1,12 @@
-import 'package:bmi_calculator/ResultsPage.dart';
+import 'package:bmi_calculator/screens/result_page.dart';
+import 'package:bmi_calculator/widgets/bmi_theme.dart';
 import 'package:flutter/material.dart';
-import 'height_card.dart';
-import 'package:bmi_calculator/BMItheme.dart';
-import 'weight_card.dart';
-import 'gender_card.dart';
-import 'utils.dart' show screenAwareSize;
-import 'gender.dart';
+
+import '../model/gender.dart';
+import '../widgets/gender_card.dart';
+import '../widgets/height_card.dart';
+import '../widgets/utils.dart' show screenAwareSize;
+import '../widgets/weight_card.dart';
 
 class BmiPage extends StatefulWidget {
   @override
@@ -33,45 +34,20 @@ class _BmiPageState extends State<BmiPage> {
     );
   }
 
-  Widget _buildTitle (BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.only(
-        left: SMALL_PADDING,
-        top: screenAwareSize(MEDIUM_PADDING, context),
-      ),
-      child: Center(child:Text(
-        "BMI Calculator",
-        style: HEADLINE_STYLE,
-      )),
-    );
-  }
-  Widget _buildBottom (BuildContext context) {
+  Widget _buildBottom(BuildContext context) {
     return Container(
         alignment: Alignment.center,
         height: screenAwareSize(LARGE_PADDING, context),
         width: double.infinity,
         child: //Switch(value: true, onChanged: (val) {}),
-        Center(
-            child: GestureDetector(
-                child: Text('🔥', style: new TextStyle(fontSize: 40.0),),
-              onTap: _pushResultPage,
-            )
-        )
-    );
-  }
-
-
-  void _pushResultPage(){
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => ResultPage(
-            height: height,
-            weight: weight,
-            gender: gender,
-          )
-      ),
-    );
+            Center(
+                child: GestureDetector(
+          child: Text(
+            '🔥',
+            style: new TextStyle(fontSize: 40.0),
+          ),
+          onTap: _pushResultPage,
+        )));
   }
 
   Widget _buildCards(BuildContext context) {
@@ -86,23 +62,52 @@ class _BmiPageState extends State<BmiPage> {
           Expanded(
             child: Column(
               children: <Widget>[
-                Expanded(child: GenderCard(
+                Expanded(
+                    child: GenderCard(
                   gender: gender,
                   onChanged: (val) => setState(() => gender = val),
                 )),
-                Expanded(child: WeightCard(
+                Expanded(
+                    child: WeightCard(
                   weight: weight,
                   onChanged: (val) => setState(() => weight = val),
                 )),
               ],
             ),
           ),
-          Expanded(child: HeightCard(
+          Expanded(
+              child: HeightCard(
             height: height,
             onChanged: (val) => setState(() => height = val),
           ))
         ],
       ),
+    );
+  }
+
+  Widget _buildTitle(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: SMALL_PADDING,
+        top: screenAwareSize(MEDIUM_PADDING, context),
+      ),
+      child: Center(
+          child: Text(
+        "BMI Calculator",
+        style: HEADLINE_STYLE,
+      )),
+    );
+  }
+
+  void _pushResultPage() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+          builder: (context) => ResultPage(
+                height: height,
+                weight: weight,
+                gender: gender,
+              )),
     );
   }
 }

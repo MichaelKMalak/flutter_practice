@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
-import 'BmiPage.dart';
 import 'package:flutter/services.dart';
-import 'BMItheme.dart';
+
+import 'screens/bmi_page.dart';
+import 'widgets/bmi_theme.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
+          [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((_) => runApp(new MyApp()));
+}
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
 }
 
 class MyApp extends StatelessWidget {
@@ -19,11 +25,6 @@ class MyApp extends StatelessWidget {
       home: HomePage(),
     );
   }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
