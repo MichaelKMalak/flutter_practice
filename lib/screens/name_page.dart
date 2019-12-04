@@ -1,4 +1,3 @@
-import 'package:bmi_calculator/model/state.dart';
 import 'package:bmi_calculator/strings/text.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:division/division.dart';
@@ -9,8 +8,9 @@ import '../widgets/utils.dart';
 
 class NamePage extends StatefulWidget {
   final VoidCallback onChangePage;
+  String name = "";
 
-  const NamePage({Key key, this.onChangePage})
+  NamePage({Key key, this.onChangePage, this.name})
       : assert(onChangePage != null),
         super(key: key);
 
@@ -47,8 +47,7 @@ class _NamePageState extends State<NamePage> {
                     maxLines: 1,
                     onEditingComplete: () {
                       if (_name.isNotEmpty) {
-                        AppState().name = _name;
-                        print("the saved name is ${AppState().name}");
+                        widget.name = _name;
                         widget.onChangePage();
                       }
                     },

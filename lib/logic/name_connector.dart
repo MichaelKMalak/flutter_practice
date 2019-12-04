@@ -11,6 +11,7 @@ class NameConnector extends StatelessWidget {
       builder: (BuildContext context, ViewModelName vm) =>
           NamePage(
             onChangePage: vm.onChangePage,
+            name: vm.userName,
           ),
     );
   }
@@ -19,9 +20,14 @@ class NameConnector extends StatelessWidget {
 class ViewModelName extends BaseModel<AppState> {
   ViewModelName();
 
+  String userName;
   VoidCallback onChangePage;
 
-  ViewModelName.build({@required this.onChangePage});
+  //_name.length > 10 ? _name.substring(0, 10) : _name
+
+  ViewModelName.build({
+    @required this.onChangePage,
+    @required this.userName,});
 
   @override
   ViewModelName fromStore() => ViewModelName.build(

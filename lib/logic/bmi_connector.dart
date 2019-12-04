@@ -9,11 +9,10 @@ class BmiConnector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String _name = AppState().name ?? 'hamada';
     return StoreConnector<AppState, ViewModelBmi>(
       model: ViewModelBmi(),
       builder: (BuildContext context, ViewModelBmi vm) => BmiPage(
-        name: _name.length > 10 ? _name.substring(0, 10) : _name,
+        //name: ,
         onChangePage: vm.onChangePage,
       ),
     );

@@ -1,3 +1,2 @@
 class AppState {
-  String name;
 }
