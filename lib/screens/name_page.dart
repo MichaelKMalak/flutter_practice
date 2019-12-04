@@ -1,17 +1,24 @@
 import 'package:bmi_calculator/screens/bmi_page.dart';
-import 'package:flutter/material.dart';
-import 'package:bmi_calculator/widgets/utils.dart';
-import '../widgets/utils.dart';
-import 'package:division/division.dart';
 import 'package:bmi_calculator/strings/text.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import 'package:division/division.dart';
+import 'package:flutter/material.dart';
+
+import '../widgets/utils.dart';
 
 
-class NameCard extends StatefulWidget {
+class NamePage extends StatefulWidget {
+  final VoidCallback onChangePage;
+
+  const NamePage({Key key, this.onChangePage})
+      : assert(onChangePage != null),
+        super(key: key);
+
   @override
-  _NameCardState createState() => _NameCardState();
+  _NamePageState createState() => _NamePageState();
 }
 
-class _NameCardState extends State<NameCard> {
+class _NamePageState extends State<NamePage> {
   String _name;
 
   final editableStyle = (BuildContext context) => TxtStyle()
@@ -37,7 +44,9 @@ class _NameCardState extends State<NameCard> {
                 ..editable(
                   placeholder: "",
                   maxLines: 1,
-                  onEditingComplete: () { if(_name.isNotEmpty) _pushBmiPage();},
+                  onEditingComplete: () {
+                    if (_name.isNotEmpty) widget.onChangePage;
+                  },
                   onChange: (newName) => setState(() => _name = newName),
                 )),
         ]);

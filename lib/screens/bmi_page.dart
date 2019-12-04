@@ -1,19 +1,23 @@
 import 'package:bmi_calculator/screens/result_page.dart';
-import 'package:flutter/material.dart';
-import '../widgets/height_card.dart';
-import 'package:bmi_calculator/widgets/utils.dart';
-import '../widgets/weight_card.dart';
-import '../widgets/gender_card.dart';
-import '../widgets/utils.dart' show screenAwareSize;
-import '../model/gender.dart';
-import 'package:division/division.dart';
 import 'package:bmi_calculator/strings/text.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import 'package:division/division.dart';
+import 'package:flutter/material.dart';
+
+import '../model/gender.dart';
+import '../widgets/gender_card.dart';
+import '../widgets/height_card.dart';
+import '../widgets/utils.dart' show screenAwareSize;
+import '../widgets/weight_card.dart';
 
 
 class BmiPage extends StatefulWidget {
   final String name;
+  final VoidCallback onChangePage;
 
-  const BmiPage({Key key, this.name}) : super(key: key);
+  const BmiPage({Key key, this.name, this.onChangePage})
+      : assert(onChangePage != null),
+        super(key: key);
 
   @override
   _BmiPageState createState() => _BmiPageState();
