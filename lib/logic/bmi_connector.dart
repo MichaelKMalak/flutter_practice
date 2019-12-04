@@ -1,5 +1,5 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:bmi_calculator/model/app_state.dart';
+import 'package:bmi_calculator/model/state.dart';
 import 'package:bmi_calculator/screens/bmi_page.dart';
 import 'package:flutter/material.dart';
 

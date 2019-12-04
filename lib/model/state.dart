@@ -1,4 +1,4 @@
-class DataState {
+class AppState {
   final String name;
 
   AppState({this.name});
