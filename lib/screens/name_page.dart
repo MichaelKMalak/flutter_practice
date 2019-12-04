@@ -8,9 +8,12 @@ import '../widgets/utils.dart';
 
 class NamePage extends StatefulWidget {
   final VoidCallback onChangePage;
-  String name = "";
+  final ValueChanged<String> onSaveName;
 
-  NamePage({Key key, this.onChangePage, this.name})
+  NamePage({
+    Key key,
+    this.onChangePage,
+    this.onSaveName})
       : assert(onChangePage != null),
         super(key: key);
 
@@ -19,7 +22,6 @@ class NamePage extends StatefulWidget {
 }
 
 class _NamePageState extends State<NamePage> {
-  String _name;
 
   final editableStyle = (BuildContext context) => TxtStyle()
     ..textColor(Colors.black)
@@ -43,15 +45,13 @@ class _NamePageState extends State<NamePage> {
             Txt('',
                 style: editableStyle(context)
                   ..editable(
-                    placeholder: "",
                     maxLines: 1,
                     onEditingComplete: () {
-                      if (_name.isNotEmpty) {
-                        widget.name = _name;
-                        widget.onChangePage();
-                      }
+                      widget.onChangePage();
                     },
-                    onChange: (newName) => setState(() => _name = newName),
+                    onChange: (newName) =>
+                        setState(() =>
+                            widget.onSaveName(newName)),
                   )),
           ]),
     );

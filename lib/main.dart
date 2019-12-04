@@ -1,19 +1,22 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:bmi_calculator/logic/bmi_connector.dart';
 import 'package:bmi_calculator/logic/name_connector.dart';
-import 'package:bmi_calculator/model/state.dart';
+import 'package:bmi_calculator/model/app_state.dart';
+import 'package:bmi_calculator/model/data_state.dart';
 import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:bmi_calculator/strings/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 Store<AppState> store;
+Store<DataState> dataStore;
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   NavigateAction.setNavigatorKey(navigatorKey);
   store = Store<AppState>(initialState: AppState());
+  dataStore = Store<DataState>(initialState: DataState.initialState());
   runApp(MyApp());
 }
 

@@ -1,5 +1,5 @@
 import 'package:async_redux/async_redux.dart';
-import 'package:bmi_calculator/model/state.dart';
+import 'package:bmi_calculator/model/app_state.dart';
 import 'package:bmi_calculator/screens/bmi_page.dart';
 import 'package:flutter/material.dart';
 
@@ -12,7 +12,7 @@ class BmiConnector extends StatelessWidget {
     return StoreConnector<AppState, ViewModelBmi>(
       model: ViewModelBmi(),
       builder: (BuildContext context, ViewModelBmi vm) => BmiPage(
-        //name: ,
+        name: '7amoksha', //AppState().name,
         onChangePage: vm.onChangePage,
       ),
     );
