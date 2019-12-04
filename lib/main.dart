@@ -13,7 +13,8 @@ final navigatorKey = GlobalKey<NavigatorState>();
 
 void main() async {
   NavigateAction.setNavigatorKey(navigatorKey);
-  store = Store<AppState>(initialState: AppState.initialState());
+  var state = AppState.initialState();
+  store = Store<AppState>(initialState: state);
   runApp(MyApp());
 }
 

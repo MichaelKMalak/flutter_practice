@@ -29,24 +29,26 @@ class ViewModelName extends BaseModel<AppState> {
 
   @override
   ViewModelName fromStore() => ViewModelName.build(
-    onSaveName: (String name) => dispatch(SaveUserAction(name)),
-    onChangePage: () => dispatch(NavigateAction.pushNamed("/bmiPage")),
-  );
+    onSaveName: (String name) => dispatch(SaveNameAction(name)),
+    onChangePage: () =>
+        dispatch(
+            NavigateAction.pushNamed("/bmiPage",
+                arguments: <String, String>{'name': state.name})
+        ),
+  ); //NavigateBmi()),
 }
 
-class SaveUserAction extends ReduxAction<AppState> {
+////////////////////////////////////////////////////
+
+class SaveNameAction extends ReduxAction<AppState> {
   final String name;
 
-  SaveUserAction(this.name);
+  SaveNameAction(this.name);
 
   @override
   AppState reduce() {
-    print('reducer: $name\n');
-    print('appstatenow: ${AppState().name}');
     return state.copy(
         name: name); //name.length > 10 ? name.substring(0, 10) : name);
   }
-
-  @override
-  Object wrapError(error) => UserException("Save failed", cause: error);
 }
+

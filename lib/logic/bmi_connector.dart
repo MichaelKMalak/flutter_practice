@@ -5,14 +5,17 @@ import 'package:flutter/material.dart';
 
 class BmiConnector extends StatelessWidget {
 
-  const BmiConnector({Key key}) : super(key: key);
+  final String name;
+
+  const BmiConnector({Key key, this.name}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    print("Got it! -> $name");
     return StoreConnector<AppState, ViewModelBmi>(
       model: ViewModelBmi(),
       builder: (BuildContext context, ViewModelBmi vm) => BmiPage(
-        name: '7amoksha', //AppState().name,
+        name: 'lol', //name,
         onChangePage: vm.onChangePage,
       ),
     );
