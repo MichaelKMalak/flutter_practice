@@ -30,12 +30,8 @@ class ViewModelName extends BaseModel<AppState> {
   @override
   ViewModelName fromStore() => ViewModelName.build(
     onSaveName: (String name) => dispatch(SaveNameAction(name)),
-    onChangePage: () =>
-        dispatch(
-            NavigateAction.pushNamed("/bmiPage",
-                arguments: <String, String>{'name': state.name})
-        ),
-  ); //NavigateBmi()),
+    onChangePage: () => dispatch(NavigateAction.pushNamed("/bmiPage")),
+  );
 }
 
 ////////////////////////////////////////////////////
@@ -48,7 +44,6 @@ class SaveNameAction extends ReduxAction<AppState> {
   @override
   AppState reduce() {
     return state.copy(
-        name: name); //name.length > 10 ? name.substring(0, 10) : name);
+        name: name);
   }
 }
-

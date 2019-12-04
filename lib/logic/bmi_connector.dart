@@ -11,11 +11,10 @@ class BmiConnector extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Got it! -> $name");
     return StoreConnector<AppState, ViewModelBmi>(
       model: ViewModelBmi(),
       builder: (BuildContext context, ViewModelBmi vm) => BmiPage(
-        name: 'lol', //name,
+        name: vm.name,
         onChangePage: vm.onChangePage,
       ),
     );
@@ -25,12 +24,14 @@ class BmiConnector extends StatelessWidget {
 class ViewModelBmi extends BaseModel<AppState> {
   ViewModelBmi();
 
+  String name;
   VoidCallback onChangePage;
 
-  ViewModelBmi.build({@required this.onChangePage});
+  ViewModelBmi.build({@required this.onChangePage, @required this.name});
 
   @override
   ViewModelBmi fromStore() => ViewModelBmi.build(
-        onChangePage: () => dispatch(NavigateAction.pushNamed("/resultPage")),
+    name: state.name,
+    onChangePage: () => dispatch(NavigateAction.pushNamed("/resultPage")),
       );
 }
