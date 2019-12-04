@@ -1,4 +1,4 @@
-import 'package:bmi_calculator/screens/bmi_page.dart';
+import 'package:bmi_calculator/model/state.dart';
 import 'package:bmi_calculator/strings/text.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:division/division.dart';
@@ -35,30 +35,27 @@ class _NamePageState extends State<NamePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Txt(WHAT_IS_YOUR_NAME_TXT, style: cardTitleStyle),
-          Txt('',
-              style: editableStyle(context)
-                ..editable(
-                  placeholder: "",
-                  maxLines: 1,
-                  onEditingComplete: () {
-                    if (_name.isNotEmpty) widget.onChangePage;
-                  },
-                  onChange: (newName) => setState(() => _name = newName),
-                )),
-        ]);
-  }
-
-  void _pushBmiPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) => BmiPage(
-                name: _name.length > 10? _name.substring(0,10) : _name,
-              )),
+    return Scaffold(
+      body: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Txt(WHAT_IS_YOUR_NAME_TXT, style: cardTitleStyle),
+            Txt('',
+                style: editableStyle(context)
+                  ..editable(
+                    placeholder: "",
+                    maxLines: 1,
+                    onEditingComplete: () {
+                      if (_name.isNotEmpty) {
+                        AppState().name = _name;
+                        print("the saved name is ${AppState().name}");
+                        widget.onChangePage();
+                      }
+                    },
+                    onChange: (newName) => setState(() => _name = newName),
+                  )),
+          ]),
     );
   }
+
 }

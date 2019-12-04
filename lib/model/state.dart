@@ -1,1 +1,3 @@
-class AppState {}
+class AppState {
+  String name;
+}

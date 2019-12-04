@@ -4,16 +4,16 @@ import 'package:bmi_calculator/screens/bmi_page.dart';
 import 'package:flutter/material.dart';
 
 class BmiConnector extends StatelessWidget {
-  final String name;
 
-  const BmiConnector({Key key, this.name}) : super(key: key);
+  const BmiConnector({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String _name = AppState().name ?? 'hamada';
     return StoreConnector<AppState, ViewModelBmi>(
       model: ViewModelBmi(),
       builder: (BuildContext context, ViewModelBmi vm) => BmiPage(
-        name: name.length > 10 ? name.substring(0, 10) : name,
+        name: _name.length > 10 ? _name.substring(0, 10) : _name,
         onChangePage: vm.onChangePage,
       ),
     );

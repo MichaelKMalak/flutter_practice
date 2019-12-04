@@ -8,7 +8,10 @@ class NameConnector extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, ViewModelName>(
       model: ViewModelName(),
-      builder: (BuildContext context, ViewModelName vm) => NamePage(),
+      builder: (BuildContext context, ViewModelName vm) =>
+          NamePage(
+            onChangePage: vm.onChangePage,
+          ),
     );
   }
 }
