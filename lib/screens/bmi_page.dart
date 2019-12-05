@@ -9,7 +9,6 @@ import '../widgets/height_card.dart';
 import '../widgets/utils.dart' show screenAwareSize;
 import '../widgets/weight_card.dart';
 
-
 class BmiPage extends StatefulWidget {
   final String name;
   final VoidCallback onChangePage;
@@ -17,12 +16,14 @@ class BmiPage extends StatefulWidget {
   final ValueChanged<int> onChangeHeight;
   final ValueChanged<int> onChangeWeight;
 
-  const BmiPage({Key key,
+  const BmiPage({
+    Key key,
     this.name,
     this.onChangePage,
     this.onChangeGender,
     this.onChangeHeight,
-    this.onChangeWeight,})
+    this.onChangeWeight,
+  })
       : assert(onChangePage != null),
         super(key: key);
 
@@ -34,7 +35,6 @@ class _BmiPageState extends State<BmiPage> {
   Gender gender = Gender.other;
   int height = 180;
   int weight = 70;
-
 
   @override
   Widget build(BuildContext context) {
@@ -52,18 +52,19 @@ class _BmiPageState extends State<BmiPage> {
     );
   }
 
-  Widget _buildTitle(BuildContext context) {
-    final ParentStyle titleStyle = ParentStyle()
-      ..margin(
-        top: screenAwareSize(MEDIUM_DIM, context),
-        left: screenAwareSize(MEDIUM_DIM, context),
-      );
+  void changeGender(Gender val) {
+    widget.onChangeGender(val);
+    gender = val;
+  }
 
-    return Parent(
-      style: titleStyle,
-      child:
-      Txt(HI_TXT + widget.name + "👋", style: headlineStyle),
-    );
+  void changeHeight(int val) {
+    widget.onChangeHeight(val);
+    height = val;
+  }
+
+  void changeWeight(int val) {
+    widget.onChangeWeight(val);
+    weight = val;
   }
 
   Widget _buildBottom(BuildContext context) {
@@ -77,10 +78,8 @@ class _BmiPageState extends State<BmiPage> {
       style: bottomStyle,
       gesture: Gestures()
         ..onTap(widget.onChangePage),
-
-      child: Txt('🔥',
-          style: TxtStyle()
-            ..fontSize(LARGE_FONT)),
+      child: Txt('🔥', style: TxtStyle()
+        ..fontSize(LARGE_FONT)),
     );
   }
 
@@ -89,7 +88,8 @@ class _BmiPageState extends State<BmiPage> {
       ..padding(
         left: SMALL_DIM,
         right: SMALL_DIM,
-        top: screenAwareSize(SMALL_DIM, context),);
+        top: screenAwareSize(SMALL_DIM, context),
+      );
 
     return Parent(
       style: mainPageStyle,
@@ -98,18 +98,21 @@ class _BmiPageState extends State<BmiPage> {
           Expanded(
             child: Column(
               children: <Widget>[
-                Expanded(child: GenderCard(
+                Expanded(
+                    child: GenderCard(
                   gender: gender,
                   onChanged: (val) => setState(() => changeGender(val)),
                 )),
-                Expanded(child: WeightCard(
+                Expanded(
+                    child: WeightCard(
                   weight: weight,
                   onChanged: (val) => setState(() => changeWeight(val)),
                 )),
               ],
             ),
           ),
-          Expanded(child: HeightCard(
+          Expanded(
+              child: HeightCard(
             height: height,
             onChanged: (val) => setState(() => changeHeight(val)),
           ))
@@ -118,18 +121,16 @@ class _BmiPageState extends State<BmiPage> {
     );
   }
 
-  void changeHeight(int val) {
-    widget.onChangeHeight(val);
-    height = val;
-  }
+  Widget _buildTitle(BuildContext context) {
+    final ParentStyle titleStyle = ParentStyle()
+      ..margin(
+        top: screenAwareSize(MEDIUM_DIM, context),
+        left: screenAwareSize(MEDIUM_DIM, context),
+      );
 
-  void changeWeight(int val) {
-    widget.onChangeWeight(val);
-    weight = val;
-  }
-
-  void changeGender(Gender val) {
-    widget.onChangeGender(val);
-    gender = val;
+    return Parent(
+      style: titleStyle,
+      child: Txt(HI_TXT + widget.name + "👋", style: headlineStyle),
+    );
   }
 }

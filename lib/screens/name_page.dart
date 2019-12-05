@@ -5,15 +5,11 @@ import 'package:flutter/material.dart';
 
 import '../widgets/utils.dart';
 
-
 class NamePage extends StatefulWidget {
   final VoidCallback onChangePage;
   final ValueChanged<String> onSaveName;
 
-  NamePage({
-    Key key,
-    this.onChangePage,
-    this.onSaveName})
+  NamePage({Key key, this.onChangePage, this.onSaveName})
       : assert(onChangePage != null),
         super(key: key);
 
@@ -22,7 +18,6 @@ class NamePage extends StatefulWidget {
 }
 
 class _NamePageState extends State<NamePage> {
-
   final editableStyle = (BuildContext context) => TxtStyle()
     ..textColor(Colors.black)
     ..textAlign.left()
@@ -50,11 +45,9 @@ class _NamePageState extends State<NamePage> {
                       widget.onChangePage();
                     },
                     onChange: (newName) =>
-                        setState(() =>
-                            widget.onSaveName(newName)),
+                        setState(() => widget.onSaveName(newName)),
                   )),
           ]),
     );
   }
-
 }

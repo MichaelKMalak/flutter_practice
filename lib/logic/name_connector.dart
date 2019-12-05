@@ -17,23 +17,6 @@ class NameConnector extends StatelessWidget {
   }
 }
 
-class ViewModelName extends BaseModel<AppState> {
-  ViewModelName();
-
-  ValueChanged<String> onSaveName;
-  VoidCallback onChangePage;
-
-  ViewModelName.build({
-    @required this.onChangePage,
-    @required this.onSaveName,});
-
-  @override
-  ViewModelName fromStore() => ViewModelName.build(
-    onSaveName: (String name) => dispatch(SaveNameAction(name)),
-    onChangePage: () => dispatch(NavigateAction.pushNamed("/bmiPage")),
-  );
-}
-
 ////////////////////////////////////////////////////
 
 class SaveNameAction extends ReduxAction<AppState> {
@@ -43,7 +26,25 @@ class SaveNameAction extends ReduxAction<AppState> {
 
   @override
   AppState reduce() {
-    return state.copy(
-        name: name);
+    return state.copy(name: name);
   }
+}
+
+class ViewModelName extends BaseModel<AppState> {
+  ValueChanged<String> onSaveName;
+
+  VoidCallback onChangePage;
+
+  ViewModelName();
+
+  ViewModelName.build({
+    @required this.onChangePage,
+    @required this.onSaveName,
+  });
+
+  @override
+  ViewModelName fromStore() => ViewModelName.build(
+    onSaveName: (String name) => dispatch(SaveNameAction(name)),
+    onChangePage: () => dispatch(NavigateAction.pushNamed("/bmiPage")),
+  );
 }

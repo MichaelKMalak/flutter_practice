@@ -5,7 +5,6 @@ import 'package:bmi_calculator/screens/bmi_page.dart';
 import 'package:flutter/material.dart';
 
 class BmiConnector extends StatelessWidget {
-
   const BmiConnector({Key key}) : super(key: key);
 
   @override
@@ -23,35 +22,6 @@ class BmiConnector extends StatelessWidget {
   }
 }
 
-class ViewModelBmi extends BaseModel<AppState> {
-  ViewModelBmi();
-
-  String name;
-  VoidCallback onChangePage;
-  ValueChanged<Gender> onChangeGender;
-  ValueChanged<int> onChangeHeight;
-  ValueChanged<int> onChangeWeight;
-
-
-  ViewModelBmi.build({
-    @required this.onChangePage,
-    @required this.name,
-    @required this.onChangeWeight,
-    @required this.onChangeHeight,
-    @required this.onChangeGender,});
-
-  @override
-  ViewModelBmi fromStore() => ViewModelBmi.build(
-    name: state.name,
-    onChangeWeight: (int weight) => dispatch(SaveWeightAction(weight)),
-    onChangeHeight: (int height) => dispatch(SaveHeightAction(height)),
-    onChangeGender: (Gender gender) => dispatch(SaveGenderAction(gender)),
-    onChangePage: () =>
-        dispatch(NavigateAction.pushNamed("/resultPage"),
-        ),
-      );
-}
-
 ////////////////////////////////////////////////////
 
 class SaveGenderAction extends ReduxAction<AppState> {
@@ -62,6 +32,19 @@ class SaveGenderAction extends ReduxAction<AppState> {
   @override
   AppState reduce() {
     return state.copy(gender: gender);
+  }
+}
+
+////////////////////////////////////////////////////
+
+class SaveHeightAction extends ReduxAction<AppState> {
+  final int height;
+
+  SaveHeightAction(this.height);
+
+  @override
+  AppState reduce() {
+    return state.copy(height: height);
   }
 }
 ////////////////////////////////////////////////////
@@ -76,15 +59,33 @@ class SaveWeightAction extends ReduxAction<AppState> {
     return state.copy(weight: weight);
   }
 }
-////////////////////////////////////////////////////
+class ViewModelBmi extends BaseModel<AppState> {
+  String name;
 
-class SaveHeightAction extends ReduxAction<AppState> {
-  final int height;
+  VoidCallback onChangePage;
+  ValueChanged<Gender> onChangeGender;
+  ValueChanged<int> onChangeHeight;
+  ValueChanged<int> onChangeWeight;
 
-  SaveHeightAction(this.height);
+  ViewModelBmi();
+
+  ViewModelBmi.build({
+    @required this.onChangePage,
+    @required this.name,
+    @required this.onChangeWeight,
+    @required this.onChangeHeight,
+    @required this.onChangeGender,
+  });
 
   @override
-  AppState reduce() {
-    return state.copy(height: height);
-  }
+  ViewModelBmi fromStore() => ViewModelBmi.build(
+    name: state.name,
+    onChangeWeight: (int weight) => dispatch(SaveWeightAction(weight)),
+    onChangeHeight: (int height) => dispatch(SaveHeightAction(height)),
+    onChangeGender: (Gender gender) => dispatch(SaveGenderAction(gender)),
+    onChangePage: () =>
+        dispatch(
+          NavigateAction.pushNamed("/resultPage"),
+        ),
+      );
 }

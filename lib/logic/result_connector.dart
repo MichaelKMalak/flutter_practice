@@ -19,13 +19,27 @@ class ResultConnector extends StatelessWidget {
   }
 }
 
-class ViewModelResult extends BaseModel<AppState> {
-  ViewModelResult();
+////////////////////////////////////////////////////
 
+class SaveNameAction extends ReduxAction<AppState> {
+  final String name;
+
+  SaveNameAction(this.name);
+
+  @override
+  AppState reduce() {
+    return state.copy(name: name);
+  }
+}
+
+class ViewModelResult extends BaseModel<AppState> {
   VoidCallback onChangeBmi;
+
   VoidCallback onChangeName;
   String bmi;
   String bmiEvaluation;
+
+  ViewModelResult();
 
   ViewModelResult.build(
       {@required this.bmi,
@@ -47,17 +61,4 @@ class ViewModelResult extends BaseModel<AppState> {
         onChangeBmi: () => dispatch(NavigateAction.pop()),
         onChangeName: () => dispatch(NavigateAction.popUntil("/")),
       );
-}
-
-////////////////////////////////////////////////////
-
-class SaveNameAction extends ReduxAction<AppState> {
-  final String name;
-
-  SaveNameAction(this.name);
-
-  @override
-  AppState reduce() {
-    return state.copy(name: name);
-  }
 }

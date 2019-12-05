@@ -7,10 +7,6 @@ import 'package:bmi_calculator/strings/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-Store<AppState> store;
-
-final navigatorKey = GlobalKey<NavigatorState>();
-
 void main() async {
   NavigateAction.setNavigatorKey(navigatorKey);
   var state = AppState.initialState();
@@ -18,12 +14,15 @@ void main() async {
   runApp(MyApp());
 }
 
+final navigatorKey = GlobalKey<NavigatorState>();
 
 final routes = {
   '/': (BuildContext context) => NameConnector(),
   "/bmiPage": (BuildContext context) => BmiConnector(),
   "/resultPage": (BuildContext context) => ResultConnector(),
 };
+
+Store<AppState> store;
 
 class MyApp extends StatelessWidget {
   @override
@@ -40,4 +39,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
