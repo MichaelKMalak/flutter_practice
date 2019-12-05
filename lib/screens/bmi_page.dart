@@ -1,4 +1,3 @@
-import 'package:bmi_calculator/strings/text.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
