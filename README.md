@@ -20,5 +20,9 @@ This repository is consisting of different branches. Each one is an independent 
 * [BMI-with-packages](https://github.com/MichaelKMalak/flutter_practice/tree/BMI-with-packages)
 	* A three-page app to calculate bmi from three different user inputs. 
 	* Why? to get to use [division](https://pub.dev/packages/division)
+
 * [BMI-with-packages-2](https://github.com/MichaelKMalak/flutter_practice/tree/BMI-with-packages-2) 
 	* Why? to get to use [async_redux](https://github.com/marcglasberg/async_redux).
+	
+* [to-do]() 
+	* Why? to get to use [permission_handler](https://pub.dev/packages/permission_handler) and [Firebase](https://pub.dev/packages/firebase_messaging).
