@@ -1,19 +1,23 @@
-import 'package:bmi_calculator/logic/calculator.dart' as calculator;
-import 'package:flutter/material.dart';
-import '../model/gender.dart';
-import 'package:bmi_calculator/widgets/utils.dart';
-import '../widgets/utils.dart';
-import 'package:division/division.dart';
-import 'package:share/share.dart';
 import 'package:bmi_calculator/strings/text.dart';
+import 'package:bmi_calculator/widgets/utils.dart';
+import 'package:division/division.dart';
+import 'package:flutter/material.dart';
+import 'package:share/share.dart';
+
+import '../widgets/utils.dart';
 
 
 class ResultPage extends StatefulWidget {
-  final int height;
-  final int weight;
-  final Gender gender;
+  final String bmi;
+  final String bmiEvaluation;
+  final VoidCallback onChangeBmi;
+  final VoidCallback onChangeName;
 
-  const ResultPage({Key key, this.height, this.weight, this.gender})
+  const ResultPage({Key key,
+    this.bmi,
+    this.bmiEvaluation,
+    this.onChangeBmi,
+    this.onChangeName,})
       : super(key: key);
 
   @override
@@ -21,17 +25,6 @@ class ResultPage extends StatefulWidget {
 }
 
 class _ResultPageState extends State<ResultPage> {
-  String get bmi => calculator
-      .calculateBMI(
-        height: widget.height,
-        weight: widget.weight,
-      )
-      .toStringAsFixed(1);
-
-  String get bmiEvaluation => calculator.evaluateBMI(
-        bmiStr: bmi,
-      );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +33,7 @@ class _ResultPageState extends State<ResultPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildTitle(context),
-            Expanded(child: ResultCard(bmi: bmi)),
+            Expanded(child: ResultCard(bmi: widget.bmi)),
             _buildBottom(context),
           ],
         ),
@@ -55,20 +48,14 @@ class _ResultPageState extends State<ResultPage> {
 
   return Parent(
     style: titleStyle,
-    child: Txt(YOU_ARE_TXT + bmiEvaluation,
+    child: Txt(YOU_ARE_TXT + widget.bmiEvaluation,
       style: cardTitleStyle),
   );
   }
-  void _popResultPage() =>
-      Navigator.pop(context);
-
-
-  void _popTillNamePage() =>
-      Navigator.popUntil(context, ModalRoute.withName(Navigator.defaultRouteName));
 
 
   void _share() =>
-      Share.share(MY_BMI_TXT + bmi + I_AM_TXT + bmiEvaluation);
+      Share.share(MY_BMI_TXT + widget.bmi + I_AM_TXT + widget.bmiEvaluation);
 
 
   Widget _buildBottom(BuildContext context) {
@@ -82,14 +69,14 @@ class _ResultPageState extends State<ResultPage> {
                   icon: Icon(Icons.arrow_back_ios),
                   iconSize: 30,
                   color: SECONDARY_BTN_COLOR,
-                  onPressed: _popResultPage,
+                  onPressed: widget.onChangeBmi,
                   tooltip: BACK_TXT,
                 ),
                 IconButton(
                   icon: Icon(Icons.refresh),
                   iconSize: 50,
                   color: PRIMARY_BTN_COLOR,
-                  onPressed: () => _popTillNamePage(),
+                  onPressed: widget.onChangeName,
                   tooltip: RESTART_TXT,
                 ),
                 IconButton(

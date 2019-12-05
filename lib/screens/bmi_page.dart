@@ -1,4 +1,3 @@
-import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:bmi_calculator/strings/text.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:division/division.dart';
@@ -14,8 +13,16 @@ import '../widgets/weight_card.dart';
 class BmiPage extends StatefulWidget {
   final String name;
   final VoidCallback onChangePage;
+  final ValueChanged<Gender> onChangeGender;
+  final ValueChanged<int> onChangeHeight;
+  final ValueChanged<int> onChangeWeight;
 
-  const BmiPage({Key key, this.name, this.onChangePage})
+  const BmiPage({Key key,
+    this.name,
+    this.onChangePage,
+    this.onChangeGender,
+    this.onChangeHeight,
+    this.onChangeWeight,})
       : assert(onChangePage != null),
         super(key: key);
 
@@ -27,6 +34,7 @@ class _BmiPageState extends State<BmiPage> {
   Gender gender = Gender.other;
   int height = 180;
   int weight = 70;
+
 
   @override
   Widget build(BuildContext context) {
@@ -53,16 +61,10 @@ class _BmiPageState extends State<BmiPage> {
 
     return Parent(
       style: titleStyle,
-      gesture: Gestures()
-        ..onTap(_popTillNamePage),
       child:
       Txt(HI_TXT + widget.name + "👋", style: headlineStyle),
     );
   }
-
-  void _popTillNamePage() =>
-      Navigator.popUntil(
-          context, ModalRoute.withName(Navigator.defaultRouteName));
 
   Widget _buildBottom(BuildContext context) {
     final ParentStyle bottomStyle = ParentStyle()
@@ -74,26 +76,11 @@ class _BmiPageState extends State<BmiPage> {
     return Parent(
       style: bottomStyle,
       gesture: Gestures()
-        ..onTap(_pushResultPage),
+        ..onTap(widget.onChangePage),
 
       child: Txt('🔥',
           style: TxtStyle()
             ..fontSize(LARGE_FONT)),
-    );
-  }
-
-
-  void _pushResultPage() {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-          builder: (context) =>
-              ResultPage(
-                height: height,
-                weight: weight,
-                gender: gender,
-              )
-      ),
     );
   }
 
@@ -113,22 +100,36 @@ class _BmiPageState extends State<BmiPage> {
               children: <Widget>[
                 Expanded(child: GenderCard(
                   gender: gender,
-                  onChanged: (val) => setState(() => gender = val),
+                  onChanged: (val) => setState(() => changeGender(val)),
                 )),
                 Expanded(child: WeightCard(
                   weight: weight,
-                  onChanged: (val) => setState(() => weight = val),
+                  onChanged: (val) => setState(() => changeWeight(val)),
                 )),
               ],
             ),
           ),
           Expanded(child: HeightCard(
             height: height,
-            onChanged: (val) => setState(() => height = val),
+            onChanged: (val) => setState(() => changeHeight(val)),
           ))
         ],
       ),
     );
+  }
 
+  void changeHeight(int val) {
+    widget.onChangeHeight(val);
+    height = val;
+  }
+
+  void changeWeight(int val) {
+    widget.onChangeWeight(val);
+    weight = val;
+  }
+
+  void changeGender(Gender val) {
+    widget.onChangeGender(val);
+    gender = val;
   }
 }

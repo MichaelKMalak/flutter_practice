@@ -1,8 +1,8 @@
 import 'package:async_redux/async_redux.dart';
 import 'package:bmi_calculator/logic/bmi_connector.dart';
 import 'package:bmi_calculator/logic/name_connector.dart';
+import 'package:bmi_calculator/logic/result_connector.dart';
 import 'package:bmi_calculator/model/state.dart';
-import 'package:bmi_calculator/screens/result_page.dart';
 import 'package:bmi_calculator/strings/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -22,7 +22,7 @@ void main() async {
 final routes = {
   '/': (BuildContext context) => NameConnector(),
   "/bmiPage": (BuildContext context) => BmiConnector(),
-  "/resultPage": (BuildContext context) => ResultPage(),
+  "/resultPage": (BuildContext context) => ResultConnector(),
 };
 
 class MyApp extends StatelessWidget {
