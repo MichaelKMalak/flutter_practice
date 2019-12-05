@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/strings/text.dart';
 import 'package:bmi_calculator/widgets/utils.dart';
 import 'package:division/division.dart';
 import 'package:flutter/material.dart';
@@ -86,9 +87,9 @@ class _BmiPageState extends State<BmiPage> {
   Widget _buildCards(BuildContext context) {
     final ParentStyle mainPageStyle = ParentStyle()
       ..padding(
-          left: SMALL_DIM,
-          right: SMALL_DIM,
-          top: screenAwareSize(SMALL_DIM, context),);
+        left: SMALL_DIM,
+        right: SMALL_DIM,
+        top: screenAwareSize(SMALL_DIM, context),);
 
     return Parent(
       style: mainPageStyle,
