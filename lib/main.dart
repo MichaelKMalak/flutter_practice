@@ -1,75 +1,91 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    title: 'Basic Shapes',
-    home: Scaffold(
-      appBar: AppBar(
-        title: Text('Basic Shapes'),
-      ),
-      body: HelloRectangle(),
-    ),
-  ));
-}
+void main() => runApp(MyApp());
 
-class HelloRectangle extends StatelessWidget {
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        color: Colors.black,
-        height: 400.0,
-        width: 400.0,
-        child: Center(
-          child: Container(
-            height: 400.0,
-            width: 400.0,
-            decoration: new BoxDecoration(
-              color: Colors.red,
-              shape: BoxShape.circle,
-            ),
-            child: Column(
-              children: <Widget>[
-                Container(
-                  height: 150.0,
-                  width: 150.0,
-                  decoration: new BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.black,
-                  ),
-                ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'To Do',
+      home: MyHomePage(),
+    );
+  }
+}
 
-                Row(
-                  children: <Widget>[
-                    Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.greenAccent,
-                      ),
-                    ),
-                    Container(
-                      height: 100.0,
-                      width: 100.0,
-                      decoration: new BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: Colors.blueAccent,
-                      ),
-                    ),
-                    Container(
-                      height: 100.0,
-                      width: 200.0,
-                      color: Colors.black,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() {
+    return _MyHomePageState();
+  }
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text('Baby Name Votes')),
+        body: _buildBody(context),
+      ),
+    );
+  }
+
+
+  Widget _buildBody(BuildContext context) {
+    return StreamBuilder<QuerySnapshot>(
+      stream: Firestore.instance.collection('baby').snapshots(),
+      builder: (context, snapshot) {
+        if (!snapshot.hasData) return LinearProgressIndicator();
+
+        return _buildList(context, snapshot.data.documents);
+      },
+    );
+  }
+
+  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
+    return ListView(
+      padding: const EdgeInsets.only(top: 20.0),
+      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
+    );
+  }
+
+  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
+    final record = Record.fromSnapshot(data);
+
+    return Padding(
+      key: ValueKey(record.name),
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border.all(color: Colors.grey),
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: ListTile(
+          title: Text(record.name),
+          trailing: Text(record.votes.toString()),
+          onTap: () => print(record),
         ),
       ),
     );
   }
+}
+
+class Record {
+  final String name;
+  final int votes;
+  final DocumentReference reference;
+
+  Record.fromMap(Map<String, dynamic> map, {this.reference})
+      : assert(map['name'] != null),
+        assert(map['votes'] != null),
+        name = map['name'],
+        votes = map['votes'];
+
+  Record.fromSnapshot(DocumentSnapshot snapshot)
+      : this.fromMap(snapshot.data, reference: snapshot.reference);
+
+  @override
+  String toString() => "Record<$name:$votes>";
 }
