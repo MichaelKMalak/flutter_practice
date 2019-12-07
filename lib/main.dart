@@ -35,10 +35,9 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget _buildBody(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('baby').snapshots(),
+      stream: Firestore.instance.collection('todo').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) return LinearProgressIndicator();
-
         return _buildList(context, snapshot.data.documents);
       },
     );
@@ -64,36 +63,44 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
         child: ListTile(
           title: Text(record.name),
-          trailing: Text(record.votes.toString()),
-          onTap: () =>
-              Firestore.instance.runTransaction((transaction) async {
-                final freshSnapshot = await transaction.get(record.reference);
-
-                final fresh = Record.fromSnapshot(freshSnapshot);
-
-                await transaction
-                    .update(record.reference, {'votes': fresh.votes + 1});
-              }),
+          trailing: drawCheckIcon(record),
+          onLongPress: () => toggleTaskStatus(record),
         ),
       ),
     );
+  }
+
+  Icon drawCheckIcon(Record record) {
+    return record.isDone ? Icon(Icons.check_circle, size: 30,)
+        : Icon(Icons.check_circle_outline, size: 30,);
+  }
+
+  toggleTaskStatus(Record record) async {
+    Firestore.instance.runTransaction((transaction) async {
+      final freshSnapshot = await transaction.get(record.reference);
+
+      final fresh = Record.fromSnapshot(freshSnapshot);
+
+      await transaction
+          .update(record.reference, {'isDone': !fresh.isDone});
+    });
   }
 }
 
 class Record {
   final String name;
-  final int votes;
+  final bool isDone;
   final DocumentReference reference;
 
   Record.fromMap(Map<String, dynamic> map, {this.reference})
       : assert(map['name'] != null),
-        assert(map['votes'] != null),
+        assert(map['isDone'] != null),
         name = map['name'],
-        votes = map['votes'];
+        isDone = map['isDone'];
 
   Record.fromSnapshot(DocumentSnapshot snapshot)
       : this.fromMap(snapshot.data, reference: snapshot.reference);
 
-  @override
-  String toString() => "Record<$name:$votes>";
+//@override
+//String toString() => "Record<$name:$isDone>";
 }
