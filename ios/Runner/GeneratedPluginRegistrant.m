@@ -7,6 +7,7 @@
 #import <firebase_auth/FirebaseAuthPlugin.h>
 #import <firebase_core/FirebaseCorePlugin.h>
 #import <firebase_messaging/FirebaseMessagingPlugin.h>
+#import <permission_handler/PermissionHandlerPlugin.h>
 
 @implementation GeneratedPluginRegistrant
 
@@ -15,6 +16,7 @@
   [FLTFirebaseAuthPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseAuthPlugin"]];
   [FLTFirebaseCorePlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseCorePlugin"]];
   [FLTFirebaseMessagingPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTFirebaseMessagingPlugin"]];
+  [PermissionHandlerPlugin registerWithRegistrar:[registry registrarForPlugin:@"PermissionHandlerPlugin"]];
 }
 
 @end

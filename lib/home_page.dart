@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_practice/message_handler.dart';
+import 'package:flutter_practice/permission.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'model.dart';
 
@@ -18,7 +20,11 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           title: Text('To Do'),
-          actions: <Widget>[MessageHandler()],
+          actions: <Widget>[
+            permissionList(),
+            MessageHandler(),
+            buildSettingsButton(),
+          ],
         ),
         body: _buildBody(context),
         floatingActionButton: FloatingActionButton(
@@ -29,6 +35,39 @@ class _HomePageState extends State<HomePage> {
           child: Icon(Icons.add),
         ),
       ),
+    );
+  }
+
+  ListView permissionList() {
+    return ListView(
+        scrollDirection: Axis.horizontal,
+        shrinkWrap: true,
+        children:
+        selectPermission()
+            .map((PermissionGroup permission) =>
+            PermissionWidget(permission))
+            .toList()
+    );
+  }
+
+  Iterable<PermissionGroup> selectPermission() {
+    return PermissionGroup.values
+        .where((PermissionGroup permission) {
+      if (permission == PermissionGroup.notification
+          || permission == PermissionGroup.calendar) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+  }
+
+  IconButton buildSettingsButton() {
+    return IconButton(
+      icon: const Icon(Icons.settings),
+      onPressed: () {
+        PermissionHandler().openAppSettings();
+      },
     );
   }
 

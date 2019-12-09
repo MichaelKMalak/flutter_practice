@@ -25,6 +25,8 @@ dependencies:
   firebase_core: ^0.4.2+1
   firebase_auth: ^0.15.1
 
+  permission_handler: ^4.0.0
+
   cupertino_icons: ^0.1.3
 
 

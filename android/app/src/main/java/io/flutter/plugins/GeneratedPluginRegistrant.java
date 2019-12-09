@@ -1,5 +1,7 @@
 package io.flutter.plugins;
 
+import com.baseflow.permissionhandler.PermissionHandlerPlugin;
+
 import io.flutter.plugin.common.PluginRegistry;
 import io.flutter.plugins.firebase.cloudfirestore.CloudFirestorePlugin;
 import io.flutter.plugins.firebase.core.FirebaseCorePlugin;
@@ -18,6 +20,7 @@ public final class GeneratedPluginRegistrant {
       FirebaseAuthPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebaseauth.FirebaseAuthPlugin"));
     FirebaseCorePlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebase.core.FirebaseCorePlugin"));
       FirebaseMessagingPlugin.registerWith(registry.registrarFor("io.flutter.plugins.firebasemessaging.FirebaseMessagingPlugin"));
+      PermissionHandlerPlugin.registerWith(registry.registrarFor("com.baseflow.permissionhandler.PermissionHandlerPlugin"));
   }
 
   private static boolean alreadyRegisteredWith(PluginRegistry registry) {
