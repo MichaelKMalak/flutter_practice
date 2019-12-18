@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
+import 'img_upload.dart';
 
-class ImgUploadPage extends StatefulWidget {
-  @override
-  _ImgUploadPageState createState() {
-    return _ImgUploadPageState();
-  }
+
+void main() {
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: 'Image Upload',
+    home: ImgUpload(),
+  )
+  );
 }
 
-class _ImgUploadPageState extends State<ImgUploadPage> {
-  @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
-          body: Text("Test!"),
-        )
-    );
-  }
-}
+
+//
