@@ -4,16 +4,16 @@
 
 #import "GeneratedPluginRegistrant.h"
 
-#if __has_include(<image_picker/FLTImagePickerPlugin.h>)
-#import <image_picker/FLTImagePickerPlugin.h>
+#if __has_include(<flutter_keyboard_visibility/KeyboardVisibilityPlugin.h>)
+#import <flutter_keyboard_visibility/KeyboardVisibilityPlugin.h>
 #else
-@import image_picker;
+@import flutter_keyboard_visibility;
 #endif
 
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
-  [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];
+  [FLTKeyboardVisibilityPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTKeyboardVisibilityPlugin"]];
 }
 
 @end
